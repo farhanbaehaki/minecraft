@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minecraft HD - Naura Edition</title>
+    <title>Minecraft HD - Heart Quest</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
@@ -31,65 +31,46 @@
     <audio id="sound-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
     <audio id="sound-pop" src="https://www.myinstants.com/media/sounds/minecraft_pop.mp3"></audio>
     <audio id="sound-levelup" src="https://www.myinstants.com/media/sounds/level-up-minecraft.mp3"></audio>
-    <audio id="bgm" loop>
-        <source src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=439366" type="audio/mpeg">
-    </audio>
+    <audio id="bgm" loop src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=439366"></audio>
 
     <div id="login-page" class="container">
-        <div class="mc-card hd-card">
-            <h1 class="mc-font">Enter Password</h1>
-            <p class="mc-font-small">Hint: Kata rahasia kita</p>
+        <div class="hd-card">
+            <h1 class="mc-font">Secure World</h1>
+            <p class="mc-font-small">Enter secret key to spawn:</p>
             <div class="input-group">
                 <input type="password" id="passwordInput" class="mc-input" placeholder="...">
-                <button onclick="checkPassword()" class="mc-button">UNLOCK</button>
+                <button onclick="checkPassword()" class="mc-button">SPAWN</button>
             </div>
             <p id="errorMessage" class="error"></p>
         </div>
     </div>
 
     <div id="main-content" class="container hidden">
-        <div class="mc-inventory hd-inventory">
-            <div class="inventory-header">
-                <span class="mc-font-small">Inventory - HD Edition</span>
-            </div>
-            
-            <div class="inventory-grid">
-                <div class="inventory-item">
-                    <div class="item-slot hd-slot" onclick="showMC('fakta')">
-                        <img src="assets/glowberries.jpg" alt="Glow Berries">
-                    </div>
-                    <span class="item-label">The Fact</span>
-                </div>
-                <div class="inventory-item">
-                    <div class="item-slot hd-slot" onclick="showMC('signal')">
-                        <img src="assets/redstone.jpg" alt="Redstone">
-                    </div>
-                    <span class="item-label">Signal</span>
-                </div>
-                <div class="inventory-item">
-                    <div class="item-slot hd-slot" onclick="showMC('mood')">
-                        <img src="assets/goldapple.jpg" alt="Heal">
-                    </div>
-                    <span class="item-label">Heal</span>
-                </div>
-                <div class="inventory-item">
-                    <div class="item-slot hd-slot glow-diamond" onclick="showMC('gift')">
-                        <img src="assets/diamond.jpg" alt="Reward">
-                    </div>
-                    <span class="item-label">Reward</span>
+        <div class="quest-card">
+            <div class="boss-hud">
+                <div class="boss-name">Naura's Daily Mood</div>
+                <div class="hp-bar-container">
+                    <div id="hp-fill" class="hp-fill"></div>
                 </div>
             </div>
 
-            <div id="mc-dialog" class="mc-dialog hidden hd-dialog">
-                <p id="mc-text"></p>
-                <button onclick="closeMC()" class="mc-button-small">X</button>
+            <div class="character-display">
+                <img src="https://raw.githubusercontent.com/papi-dev/minecraft-assets/main/assets/enchanted_golden_apple.png" id="main-sprite" class="floating-pixel">
+            </div>
+
+            <div class="hd-dialog">
+                <p id="mc-text">> [SYSTEM]: Selamat datang, Player 1. Tingkatkan mood untuk klaim Diamond!</p>
+                <div class="action-grid">
+                    <button onclick="interact('healing')" class="mc-button-small">Makan Gapple</button>
+                    <button onclick="interact('talk')" class="mc-button-small">Curhat ke Farhan</button>
+                    <button onclick="interact('gift')" class="mc-button-small">Klaim Diamond</button>
+                </div>
             </div>
         </div>
-        <p class="mc-font-white" style="position: absolute; bottom: 80px;">Click items to interact</p>
-    </div>
-
-    <div class="music-controls">
-        <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
+        
+        <div class="music-controls">
+            <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
