@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft HD - Naura Edition</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="loading-screen">
+    <div class="mojang-logo"></div>
+    <div class="loading-bar-container">
+        <div class="loading-bar"></div>
+    </div>
+</div>
+
+<div id="achievement" class="achievement-toast hidden-toast">
+    <div class="achievement-icon">
+        <img src="https://minecraft.wiki/images/Diamond_Render.png" alt="Diamond">
+    </div>
+    <div class="achievement-text">
+        <span class="yellow-text">Achievement Get!</span>
+        <span class="white-text">Unlocked Naura's Heart</span>
+    </div>
+</div>
+
+    <audio id="sound-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
+    <audio id="sound-pop" src="https://www.myinstants.com/media/sounds/minecraft_pop.mp3"></audio>
+    <audio id="sound-levelup" src="https://www.myinstants.com/media/sounds/level-up-minecraft.mp3"></audio>
+    <audio id="bgm" loop>
+        <source src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=439366" type="audio/mpeg">
+    </audio>
+
+    <div id="login-page" class="container">
+        <div class="mc-card hd-card">
+            <h1 class="mc-font">Enter Password</h1>
+            <p class="mc-font-small">Hint: Kata rahasia kita</p>
+            <div class="input-group">
+                <input type="password" id="passwordInput" class="mc-input" placeholder="...">
+                <button onclick="checkPassword()" class="mc-button">UNLOCK</button>
+            </div>
+            <p id="errorMessage" class="error"></p>
+        </div>
+    </div>
+
+    <div id="main-content" class="container hidden">
+        <div class="mc-inventory hd-inventory">
+            <div class="inventory-header">
+                <span class="mc-font-small">Inventory - HD Edition</span>
+            </div>
+            
+            <div class="inventory-grid">
+                <div class="inventory-item">
+                    <div class="item-slot hd-slot" onclick="showMC('fakta')">
+                        <img src="https://minecraft.wiki/images/Grass_Block_Render.png" alt="Grass">
+                    </div>
+                    <span class="item-label">The Fact</span>
+                </div>
+                <div class="inventory-item">
+                    <div class="item-slot hd-slot" onclick="showMC('signal')">
+                        <img src="https://minecraft.wiki/images/Redstone_Dust_Render.png" alt="Redstone">
+                    </div>
+                    <span class="item-label">Signal</span>
+                </div>
+                <div class="inventory-item">
+                    <div class="item-slot hd-slot" onclick="showMC('mood')">
+                        <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_Render.png" alt="Heal">
+                    </div>
+                    <span class="item-label">Heal</span>
+                </div>
+                <div class="inventory-item">
+                    <div class="item-slot hd-slot glow-diamond" onclick="showMC('gift')">
+                        <img src="https://minecraft.wiki/images/Diamond_Render.png" alt="Reward">
+                    </div>
+                    <span class="item-label">Reward</span>
+                </div>
+            </div>
+
+            <div id="mc-dialog" class="mc-dialog hidden hd-dialog">
+                <p id="mc-text"></p>
+                <button onclick="closeMC()" class="mc-button-small">X</button>
+            </div>
+        </div>
+        <p class="mc-font-white">Click items to interact</p>
+    </div>
+
+    <div class="music-controls">
+        <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
