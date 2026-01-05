@@ -2,19 +2,24 @@ let typingTimer;
 let isPlaying = false;
 const bgm = document.getElementById('bgm');
 
-// 1. Shaders: Background bergerak mengikuti mouse
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth) * 5;
-    const y = (e.clientY / window.innerHeight) * 5;
+// 1. Shaders: Background bergerak mengikuti mouse (PC) & Touch (Mobile)
+const moveBackground = (e) => {
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    const x = (clientX / window.innerWidth) * 5;
+    const y = (clientY / window.innerHeight) * 5;
     document.body.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
-});
+};
+
+document.addEventListener('mousemove', moveBackground);
+document.addEventListener('touchmove', moveBackground);
 
 // 2. Sound Handler
 function playSound(id) {
     const sound = document.getElementById(id);
     if (sound) {
         sound.currentTime = 0;
-        sound.play().catch(() => {});
+        sound.play().catch(() => {}); // Catch mencegah error browser jika user belum interaksi
     }
 }
 
@@ -23,7 +28,7 @@ function toggleMusic() {
     const musicBtn = document.getElementById('musicBtn');
     bgm.volume = 0.3;
     if (!isPlaying) {
-        bgm.play();
+        bgm.play().catch(e => console.log("Musik butuh interaksi user"));
         musicBtn.innerText = "Music: ON";
     } else {
         bgm.pause();
@@ -114,13 +119,12 @@ window.addEventListener('load', () => {
         setTimeout(() => {
             loader.style.display = 'none';
         }, 800);
-    }, 2500); // Tampil loading selama 2.5 detik
+    }, 2500);
 });
 
 // 8. Global Click Sound
 document.addEventListener('click', (e) => {
-    // Memainkan suara klik hanya jika klik pada area kosong (body)
-    if (e.target.tagName === 'BODY') {
+    if (e.target.tagName === 'BODY' || e.target.id === 'login-page') {
         playSound('sound-click');
     }
 });
