@@ -232,63 +232,45 @@ body::before {
 
 /* --- RESPONSIVE FIX FOR MOBILE --- */
 @media (max-width: 600px) {
-    body {
-        /* Menjaga background tetap proporsional di layar HP yang tegak */
-        background-attachment: scroll; /* Mengurangi lag di browser HP */
-        background-position: center center;
-    }
-
     .hd-card, .hd-inventory {
-        width: 92%; /* Memberi ruang di sisi kiri dan kanan */
-        padding: 15px;
-        margin: 10px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* Shadow lebih halus untuk HP */
+        width: 95%;
+        padding: 12px;
     }
 
-    .mc-font {
-        font-size: 14px; /* Ukuran judul lebih pas */
+    /* Memperkecil judul agar tidak bertabrakan */
+    .mc-font { 
+        font-size: 14px; 
+        margin-bottom: 10px;
     }
 
-    .mc-font-small {
+    .inventory-header span {
         font-size: 8px;
     }
 
-    /* Mengatur Grid Inventory agar pas di layar kecil */
     .inventory-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Menjadi 2 baris 2 kolom */
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom agar pas */
         gap: 10px;
         padding: 10px;
     }
 
     .hd-slot {
-        width: 60px; /* Ukuran slot disesuaikan */
-        height: 60px;
-        margin: 0 auto;
+        width: 55px;
+        height: 55px;
     }
 
     .hd-slot img {
-        width: 40px;
-        height: 40px;
+        width: 35px;
+        height: 35px;
     }
 
     .item-label {
-        font-size: 7px;
-    }
-
-    .mc-input {
-        width: 100%; /* Input password memenuhi lebar kartu */
-        font-size: 10px;
+        font-size: 7px; /* Mengecilkan teks di bawah icon */
     }
 
     .achievement-toast {
-        width: 80%;
+        width: 90%;
+        right: 5%;
         top: 10px;
-        right: 10px;
-        padding: 8px;
-    }
-
-    .achievement-text .white-text {
-        font-size: 7px;
     }
 }
