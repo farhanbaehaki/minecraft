@@ -41,19 +41,27 @@ function toggleMusic() {
 // 4. Password Logic & Achievement Trigger
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
-    const errorMsg = document.getElementById('errorMessage');
+    const loginPage = document.getElementById('login-page');
+    const mainContent = document.getElementById('main-content');
     
     if (input.toLowerCase() === "bubsieee") {
         playSound('sound-levelup');
         
-        // Efek transisi login
-        document.getElementById('login-page').style.opacity = '0';
+        // 1. Sembunyikan halaman login dengan efek transisi
+        loginPage.style.opacity = '0';
+        
         setTimeout(() => {
-            document.getElementById('login-page').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
+            loginPage.classList.add('hidden'); // Menghilangkan total
             
-            // Munculkan Achievement setelah masuk ke inventory
-            triggerAchievement();
+            // 2. Munculkan halaman inventory
+            mainContent.classList.remove('hidden');
+            mainContent.style.opacity = '0';
+            
+            // Trigger Fade In untuk konten utama
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+                triggerAchievement();
+            }, 50);
         }, 500);
     } else {
         playSound('sound-click');
