@@ -1,96 +1,118 @@
+/* --- MINECRAFT HD - CORE SCRIPT --- */
+
 let typingTimer;
 let isPlaying = false;
 const bgm = document.getElementById('bgm');
 
-// 1. Shaders: Background bergerak mengikuti mouse (PC) & Touch (Mobile)
+// 1. SHADERS: Background Bergerak (Parallax)
 const moveBackground = (e) => {
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
     const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    
+    // Sensitivitas pergerakan (5%)
     const x = (clientX / window.innerWidth) * 5;
     const y = (clientY / window.innerHeight) * 5;
+    
     document.body.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
 };
 
 document.addEventListener('mousemove', moveBackground);
 document.addEventListener('touchmove', moveBackground);
 
-// 2. Sound Handler
+// 2. SOUND HANDLER
 function playSound(id) {
     const sound = document.getElementById(id);
     if (sound) {
-        sound.currentTime = 0;
-        sound.play().catch(() => {}); // Catch mencegah error browser jika user belum interaksi
+        sound.currentTime = 0; // Reset suara ke awal jika diklik cepat
+        sound.play().catch(() => {
+            /* Mencegah error autplay browser */
+        });
     }
 }
 
-// 3. Music Toggle
+// 3. MUSIC TOGGLE
 function toggleMusic() {
     const musicBtn = document.getElementById('musicBtn');
+    if (!bgm) return;
+
     bgm.volume = 0.3;
     if (!isPlaying) {
-        bgm.play().catch(e => console.log("Musik butuh interaksi user"));
+        bgm.play().catch(() => console.log("Musik butuh interaksi user pertama kali"));
         musicBtn.innerText = "Music: ON";
+        musicBtn.style.backgroundColor = "#55FF55"; // Beri warna hijau jika ON
     } else {
         bgm.pause();
         musicBtn.innerText = "Music: OFF";
+        musicBtn.style.backgroundColor = "#aaaaaa";
     }
     isPlaying = !isPlaying;
     playSound('sound-click');
 }
 
-// 4. Password Logic & Achievement Trigger
+// 4. PASSWORD LOGIC
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
     const loginPage = document.getElementById('login-page');
     const mainContent = document.getElementById('main-content');
-    
+    const errorMsg = document.getElementById('errorMessage'); // Pastikan ID ini ada di HTML
+
     if (input.toLowerCase() === "bubsieee") {
         playSound('sound-levelup');
         
-        // 1. Sembunyikan halaman login dengan efek transisi
+        // Transisi Fade Out Login
         loginPage.style.opacity = '0';
         
         setTimeout(() => {
-            loginPage.classList.add('hidden'); // Menghilangkan total
+            loginPage.classList.add('hidden');
             
-            // 2. Munculkan halaman inventory
+            // Transisi Fade In Main Content
             mainContent.classList.remove('hidden');
             mainContent.style.opacity = '0';
             
-            // Trigger Fade In untuk konten utama
             setTimeout(() => {
                 mainContent.style.opacity = '1';
                 triggerAchievement();
             }, 50);
         }, 500);
     } else {
+        // Efek Gagal
         playSound('sound-click');
         document.body.classList.add('shake');
-        errorMsg.innerText = "Wrong Password!";
+        if (errorMsg) errorMsg.innerText = "Wrong Password!";
+        
         setTimeout(() => {
             document.body.classList.remove('shake');
         }, 400);
     }
 }
 
-// 5. Achievement Notification Logic
+// Tambahan: Fitur tekan Enter untuk Login
+document.getElementById('passwordInput')?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') checkPassword();
+});
+
+// 5. ACHIEVEMENT NOTIFICATION
 function triggerAchievement() {
     const toast = document.getElementById('achievement');
+    if (!toast) return;
+
     toast.classList.remove('hidden-toast');
     
-    // Hilangkan otomatis setelah 5 detik
     setTimeout(() => {
         toast.classList.add('hidden-toast');
     }, 5000);
 }
 
-// 6. Inventory Interaction (Typewriter Effect)
+// 6. INVENTORY INTERACTION (Typewriter Effect)
 function showMC(item) {
     clearTimeout(typingTimer);
     playSound('sound-pop');
+    
     const dialog = document.getElementById('mc-dialog');
     const text = document.getElementById('mc-text');
     
+    if (!dialog || !text) return;
+
     dialog.classList.remove('hidden');
     text.innerHTML = "";
 
@@ -101,13 +123,14 @@ function showMC(item) {
         gift: "> [ACHIEVEMENT]: DIAMOND DITEMUKAN! Hadiah: Voucher Makan Bareng. Screenshot layar ini untuk klaim!"
     };
 
+    const msg = messages[item] || "";
     let i = 0;
-    const msg = messages[item];
+
     function type() {
         if (i < msg.length) {
             text.innerHTML += msg.charAt(i);
             i++;
-            typingTimer = setTimeout(type, 50);
+            typingTimer = setTimeout(type, 30); // Dipercepat sedikit agar lebih smooth (30ms)
         }
     }
     type();
@@ -116,22 +139,26 @@ function showMC(item) {
 function closeMC() {
     clearTimeout(typingTimer);
     playSound('sound-click');
-    document.getElementById('mc-dialog').classList.add('hidden');
+    const dialog = document.getElementById('mc-dialog');
+    if (dialog) dialog.classList.add('hidden');
 }
 
-// 7. Initial Loading Screen Logic
+// 7. INITIAL LOADING SCREEN
 window.addEventListener('load', () => {
     const loader = document.getElementById('loading-screen');
+    if (!loader) return;
+
     setTimeout(() => {
         loader.style.opacity = '0';
         setTimeout(() => {
             loader.style.display = 'none';
         }, 800);
-    }, 2500);
+    }, 2500); // Durasi loading screen
 });
 
-// 8. Global Click Sound
+// 8. GLOBAL CLICK SOUND
 document.addEventListener('click', (e) => {
+    // Memainkan suara klik jika klik di area kosong
     if (e.target.tagName === 'BODY' || e.target.id === 'login-page') {
         playSound('sound-click');
     }
