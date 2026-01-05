@@ -54,34 +54,38 @@ function checkPassword() {
     const input = document.getElementById('passwordInput').value;
     const loginPage = document.getElementById('login-page');
     const mainContent = document.getElementById('main-content');
-    const errorMsg = document.getElementById('errorMessage'); // Pastikan ID ini ada di HTML
+    const transition = document.getElementById('world-transition');
+    const errorMsg = document.getElementById('errorMessage');
 
     if (input.toLowerCase() === "bubsieee") {
         playSound('sound-levelup');
         
-        // Transisi Fade Out Login
-        loginPage.style.opacity = '0';
+        // Mulai Efek Loading World
+        transition.style.opacity = '1';
         
         setTimeout(() => {
             loginPage.classList.add('hidden');
-            
-            // Transisi Fade In Main Content
             mainContent.classList.remove('hidden');
-            mainContent.style.opacity = '0';
             
+            // Simulasi "Generating World" sebentar
             setTimeout(() => {
-                mainContent.style.opacity = '1';
+                transition.style.opacity = '0';
                 triggerAchievement();
-            }, 50);
+                
+                // Tambahkan efek guncangan sedikit saat masuk
+                mainContent.classList.add('fadeIn');
+            }, 600);
         }, 500);
+
     } else {
-        // Efek Gagal
+        // Efek Gagal yang lebih keras
         playSound('sound-click');
-        document.body.classList.add('shake');
-        if (errorMsg) errorMsg.innerText = "Wrong Password!";
+        document.querySelector('.hd-card').classList.add('shake');
+        errorMsg.innerText = "ACCESS DENIED!";
+        errorMsg.style.color = "#FF5555";
         
         setTimeout(() => {
-            document.body.classList.remove('shake');
+            document.querySelector('.hd-card').classList.remove('shake');
         }, 400);
     }
 }
