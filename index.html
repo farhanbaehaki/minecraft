@@ -58,131 +58,38 @@
         </button>
       </div>
 
-      <div class="ui-container">
-        <div class="status-bars">
-          <div class="health-bar">
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Heart_JE2_BE2.png"
-              class="mc-icon"
-            />
-          </div>
-          <div class="hunger-bar">
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-            <img
-              src="https://minecraft.wiki/images/Pumpkin_Pie_JE2_BE2.png"
-              class="mc-icon"
-            />
-          </div>
+<div class="ui-container">
+    <div class="status-bars">
+        <div class="health-bar">
+            <script>
+                for(let i=0; i<10; i++) document.write('<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart.png" class="mc-icon">');
+            </script>
         </div>
+        <div class="hunger-bar">
+            <script>
+                for(let i=0; i<10; i++) document.write('<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/hunger.png" class="mc-icon">');
+            </script>
+        </div>
+    </div>
 
-        <div class="hotbar-container">
-          <div
-            class="hotbar-slot"
-            onclick="openLoot('Memory Line', 'Petualangan kita dimulai di sini. 🗺️')"
-          >
-            <img
-              src="https://minecraft.wiki/images/Recovery_Compass_JE1_BE1.png"
-            />
-          </div>
-          <div class="hotbar-slot" onclick="eatCake()">
-            <img src="https://minecraft.wiki/images/Cake_JE4.png" />
-            <span class="tooltip">Klik Tiup Lilin!</span>
-          </div>
-          <div
-            class="hotbar-slot active-slot"
-            onclick="openLoot('Heart of Naura', 'Harta paling berharga di dunia ini. ❤️')"
-          >
-            <img
-              src="https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE1.png"
-            />
-          </div>
-          <div
-            class="hotbar-slot"
-            onclick="openLoot('Endless Love', 'Sampai ke The End dan kembali lagi. 🌌')"
-          >
-            <img src="https://minecraft.wiki/images/Eye_of_Ender_JE3_BE2.png" />
-          </div>
-          <div
-            class="hotbar-slot"
-            onclick="openLoot('Protection IV', 'Aku akan selalu menjagamu dari mob apapun! 🛡️')"
-          >
-            <img
-              src="https://minecraft.wiki/images/Enchanted_Book_JE2_BE2.png"
-            />
-          </div>
+    <div class="hotbar-container">
+        <div class="hotbar-slot" onclick="openLoot('Memory Line', 'Petualangan dimulai! 🗺️')">
+            <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/compass.png">
         </div>
-      </div>
+        <div class="hotbar-slot" onclick="eatCake()">
+            <img src="https://minecraft.wiki/images/Cake_JE4.png">
+        </div>
+        <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Harta paling berharga. ❤️')">
+            <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart_of_the_sea.png">
+        </div>
+        <div class="hotbar-slot" onclick="openLoot('Endless Love', 'Sampai ke The End! 🌌')">
+            <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/ender_eye.png">
+        </div>
+        <div class="hotbar-slot" onclick="openLoot('Protection IV', 'Aku akan selalu menjagamu! 🛡️')">
+            <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/book.png">
+        </div>
+    </div>
+</div>
     </div>
 
     <div id="loot-modal" class="mc-modal">

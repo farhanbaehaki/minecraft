@@ -79,22 +79,23 @@ html {
   opacity: 1 !important;
 }
 
-/* Chat Box */
 #chat-box {
-  position: absolute;
-  top: 20px;
-  left: 10px;
-  width: 250px;
-  z-index: 5;
-  pointer-events: none;
+    position: absolute;
+    top: 20px; /* Pindah ke atas */
+    left: 10px;
+    width: 250px;
+    z-index: 10; /* Pastikan di atas elemen lain */
+    pointer-events: none;
 }
+
 .chat-msg {
-  background: rgba(0, 0, 0, 0.6);
-  padding: 4px 8px;
-  margin-bottom: 4px;
-  font-size: 0.6rem;
-  color: #fff;
-  text-shadow: 1px 1px #000;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    margin-bottom: 5px;
+    font-size: 0.65rem; /* Ukuran pas untuk HP */
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    border-radius: 2px;
 }
 @keyframes chatIn {
   from {
@@ -218,6 +219,7 @@ html {
   text-align: center;
   width: 80%;
   max-width: 400px;
+  color: #333; /* Teks pesan jadi kontras dan jelas */
 }
 .advancement {
   position: fixed;
@@ -234,4 +236,10 @@ html {
 }
 .show-adv {
   top: 20px !important;
+}
+
+.mc-button:active {
+  background: #5b5b5b;
+  border-color: #373737 #dbdbdb #dbdbdb #373737;
+  transform: translateY(2px); /* Memberi efek klik */
 }
