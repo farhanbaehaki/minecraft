@@ -16,6 +16,13 @@
         </div>
     </div>
 
+    <div id="loading-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #31211b url('https://www.transparenttextures.com/patterns/dirt.png'); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center;">
+    <div style="width: 250px; height: 20px; border: 2px solid white; padding: 2px; margin-bottom: 15px;">
+        <div id="loading-bar" style="width: 0%; height: 100%; background: #55FF55;"></div>
+    </div>
+    <h3 id="loading-text" style="font-family: 'Minecraftia', sans-serif; font-size: 0.8rem; text-shadow: 2px 2px #000;">Building Terrain...</h3>
+</div>
+
     <audio id="bgm" loop><source src="assets/Haggstrom.mp3" type="audio/mpeg"></audio>
     <audio id="sfx-click"><source src="assets/Click.mp3" type="audio/mpeg"></audio>
     <audio id="sfx-challenge"><source src="assets/Challenge_complete.ogg" type="audio/ogg"></audio>
