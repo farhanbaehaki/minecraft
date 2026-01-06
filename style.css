@@ -70,6 +70,9 @@ html {
   justify-content: center;
   opacity: 0;
   transition: 1s;
+  background-image: url("assets/background1.jpg");
+  background-size: cover;
+  background-position: center;
 }
 .show-content {
   display: flex !important;
@@ -79,19 +82,19 @@ html {
 /* Chat Box */
 #chat-box {
   position: absolute;
-  bottom: 160px;
-  left: 20px;
-  width: 320px;
-  color: white;
-  text-shadow: 2px 2px #000;
-  font-size: 0.7rem;
+  top: 20px;
+  left: 10px;
+  width: 250px;
+  z-index: 5;
   pointer-events: none;
 }
 .chat-msg {
-  background: rgba(0, 0, 0, 0.5);
-  padding: 3px 8px;
-  margin-bottom: 3px;
-  animation: chatIn 0.4s ease-out;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 4px 8px;
+  margin-bottom: 4px;
+  font-size: 0.6rem;
+  color: #fff;
+  text-shadow: 1px 1px #000;
 }
 @keyframes chatIn {
   from {
@@ -103,16 +106,17 @@ html {
 /* Status Bars & Hotbar */
 .ui-container {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 2px;
+  width: 100%;
 }
 .status-bars {
   display: flex;
-  width: 340px;
   justify-content: space-between;
+  width: 280px; /* Perkecil ukuran untuk HP */
   margin-bottom: 2px;
 }
 .mc-icon {
