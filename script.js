@@ -75,3 +75,34 @@ window.addEventListener('load', () => {
         setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 800);
     }, 2500);
 });
+
+let hitCount = 10;
+
+function hitShulker() {
+    if (hitCount <= 0) return;
+
+    const box = document.getElementById('shulker-box');
+    const counter = document.getElementById('hit-counter');
+    const reward = document.getElementById('reward-display');
+    const instruction = document.getElementById('instruction');
+
+    // Suara saat dipukul
+    playSound('sound-pop');
+    
+    // Efek guncang
+    box.classList.add('shake-hit');
+    setTimeout(() => box.classList.remove('shake-hit'), 200);
+
+    hitCount--;
+    counter.innerText = hitCount;
+
+    // Saat hitungan habis
+    if (hitCount === 0) {
+        playSound('sound-levelup');
+        box.style.display = 'none';
+        counter.style.display = 'none';
+        instruction.style.display = 'none';
+        reward.classList.remove('hidden');
+        triggerAchievement();
+    }
+}

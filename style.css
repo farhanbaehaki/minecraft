@@ -73,3 +73,42 @@ body {
 .error { color: #ff5555; font-size: 8px; }
 
 @media (max-width: 600px) { .quest-card { width: 90%; } }
+
+.unboxing-scene {
+    text-align: center;
+    z-index: 100;
+}
+
+.shulker-pixel {
+    width: 150px;
+    height: auto;
+    image-rendering: pixelated;
+    transition: transform 0.1s ease;
+    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4));
+}
+
+#hit-counter {
+    font-size: 20px;
+    margin-top: 20px;
+    color: #ff55ff;
+    text-shadow: 3px 3px #000;
+}
+
+/* Animasi saat kotak dipukul */
+.shake-hit {
+    animation: shake 0.2s ease-in-out;
+}
+
+.reward-item {
+    width: 80px;
+    animation: rotate3d 3s infinite linear;
+}
+
+@keyframes rotate3d {
+    from { transform: rotateY(0deg); }
+    to { transform: rotateY(360deg); }
+}
+
+#reward-display {
+    animation: popup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}

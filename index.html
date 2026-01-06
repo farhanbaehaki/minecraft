@@ -45,33 +45,25 @@
         </div>
     </div>
 
-    <div id="main-content" class="container hidden">
-        <div class="quest-card">
-            <div class="boss-hud">
-                <div class="boss-name">Naura's Daily Mood</div>
-                <div class="hp-bar-container">
-                    <div id="hp-fill" class="hp-fill"></div>
-                </div>
-            </div>
-
-            <div class="character-display">
-                <img src="https://raw.githubusercontent.com/papi-dev/minecraft-assets/main/assets/enchanted_golden_apple.png" id="main-sprite" class="floating-pixel">
-            </div>
-
-            <div class="hd-dialog">
-                <p id="mc-text">> [SYSTEM]: Selamat datang, Player 1. Tingkatkan mood untuk klaim Diamond!</p>
-                <div class="action-grid">
-                    <button onclick="interact('healing')" class="mc-button-small">Makan Gapple</button>
-                    <button onclick="interact('talk')" class="mc-button-small">Curhat ke Farhan</button>
-                    <button onclick="interact('gift')" class="mc-button-small">Klaim Diamond</button>
-                </div>
-            </div>
-        </div>
+<div id="main-content" class="container hidden">
+    <div class="unboxing-scene">
+        <h2 class="mc-font-white" id="instruction">Ketuk Shulker untuk Membuka!</h2>
         
-        <div class="music-controls">
-            <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
+        <div id="shulker-container" onclick="hitShulker()">
+            <img src="https://minecraft.wiki/images/Shulker_Box_Render.png" id="shulker-box" class="shulker-pixel">
+            <div id="hit-counter" class="mc-font-white">10</div>
+        </div>
+
+        <div id="reward-display" class="hidden">
+            <div class="hd-card">
+                <img src="https://minecraft.wiki/images/Diamond_Render.png" class="reward-item">
+                <p class="mc-font">Misi Selesai!</p>
+                <p class="mc-font-small">Kamu mendapatkan Diamond Heart. Screenshot untuk klaim janji jalan bareng!</p>
+                <button onclick="location.reload()" class="mc-button-small">Main Lagi?</button>
+            </div>
         </div>
     </div>
+</div>
 
     <script src="script.js"></script>
 </body>
