@@ -47,7 +47,7 @@ html {
   height: 100vh;
   width: 100vw;
   background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url("assets/background1.jfif");
+    url("assets/live.mp4");
   background-size: cover;
   background-position: center;
   flex-direction: column;
