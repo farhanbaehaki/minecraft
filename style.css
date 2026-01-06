@@ -1,193 +1,76 @@
-/* 1. FONT SETUP */
 @font-face {
     font-family: 'Minecraftia';
     src: url('Minecraftia.ttf') format('truetype');
 }
 
-/* 2. DASAR HALAMAN */
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: 'Minecraftia', 'Press Start 2P', cursive;
-    overflow: hidden;
-    background-color: #1a1a1a;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent; /* Hilangkan highlight biru di HP */
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Minecraftia', sans-serif;
+    overflow: hidden; background-color: #1a1a1a;
 }
 
-/* 3. LAYAR PEMBUKA (START OVERLAY) */
 #start-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95);
-    color: #FFFF55;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    cursor: pointer;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); color: #FFFF55;
+    display: flex; justify-content: center; align-items: center; z-index: 9999;
 }
 
-#start-overlay p { animation: blink 1s infinite; }
-@keyframes blink { 50% { opacity: 0.5; } }
-
-/* 4. LAYAR UTAMA (MINECRAFT MENU) */
 .minecraft-screen {
-    display: none;
-    height: 100vh;
-    width: 100%;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('assets/background1.jfif');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+    display: none; height: 100vh; width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/background1.jpg');
+    background-size: cover; background-position: center;
+    flex-direction: column; align-items: center; justify-content: center;
 }
 
-.show-content { display: flex !important; opacity: 1 !important; }
+.show-content { display: flex !important; }
 
-/* 5. LOGO & SPLASH TEXT */
-.logo-container {
-    text-align: center;
-    position: relative;
-    margin-bottom: 50px;
-}
-
-.main-title {
-    color: #AFAFAF;
-    font-size: clamp(2rem, 8vw, 4rem);
-    text-shadow: 4px 4px 0px #3F3F3F;
-    margin: 0;
-}
-
+.logo-container { text-align: center; position: relative; margin-bottom: 40px; }
+.main-title { color: #AFAFAF; font-size: clamp(2rem, 8vw, 4rem); text-shadow: 4px 4px 0px #3F3F3F; }
 .main-title span { color: #55FF55; }
 
 .splash-text {
-    color: #FFFF55;
-    font-size: 0.8rem;
-    position: absolute;
-    right: -40px; top: -10px;
-    transform: rotate(-20deg);
+    color: #FFFF55; font-size: 0.8rem; position: absolute;
+    right: -30px; top: -10px; transform: rotate(-20deg);
     animation: splashAnim 0.6s infinite alternate;
-    text-shadow: 2px 2px #333;
-    width: 200px;
 }
 
-@keyframes splashAnim {
-    from { transform: rotate(-20deg) scale(1); }
-    to { transform: rotate(-20deg) scale(1.05); }
-}
+@keyframes splashAnim { from { transform: rotate(-20deg) scale(1); } to { transform: rotate(-20deg) scale(1.1); } }
 
-/* 6. TOMBOL MENU */
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 380px;
-    max-width: 85%;
-    z-index: 5;
-}
-
+.menu-buttons { display: flex; flex-direction: column; gap: 10px; width: 320px; max-width: 90%; }
 .mc-button {
-    background-color: #7e7e7e;
-    border: 3px solid;
+    background-color: #7e7e7e; border: 3px solid;
     border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
-    color: #FFFFFF;
-    padding: 14px;
-    cursor: pointer;
-    text-shadow: 2px 2px #333;
-    font-family: inherit;
-    font-size: 0.8rem;
-    text-align: center;
+    color: white; padding: 12px; cursor: pointer; font-family: inherit;
 }
+.disabled { opacity: 0.5; }
 
-.mc-button:hover { background-color: #969696; border-color: #ffffff #747474 #747474 #ffffff; }
-.mc-button:active { background-color: #5b5b5b; border-color: #5b5b5b #5b5b5b #dbdbdb #dbdbdb; }
+/* HOTBAR FIXED */
+.hotbar-container {
+    position: absolute; bottom: 30px;
+    display: flex; gap: 4px; padding: 4px;
+    background: rgba(0,0,0,0.6); border: 4px solid #373737;
+}
+.hotbar-slot {
+    width: 44px; height: 44px; background: #8B8B8B;
+    border: 2px solid; border-color: #373737 #FFF #FFF #373737;
+    display: flex; align-items: center; justify-content: center;
+}
+.hotbar-slot img { width: 32px; height: 32px; image-rendering: pixelated; }
+.active-slot { outline: 4px solid white; outline-offset: -2px; }
 
-.disabled { opacity: 0.6; cursor: not-allowed; }
-
-/* 7. VERSI & ADVANCEMENT */
-.version-text {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.5rem;
-    z-index: 1;
+/* MODAL */
+.mc-modal {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 10000; justify-content: center; align-items: center;
+}
+.mc-modal-content {
+    background: #C6C6C6; border: 4px solid #FFF; padding: 25px; text-align: center; width: 80%;
 }
 
 .advancement {
-    position: fixed;
-    top: -100px; right: 20px;
-    background: #212121;
-    border: 2px solid #ffffff;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    z-index: 1000;
+    position: fixed; top: -100px; right: 20px; background: #212121;
+    border: 2px solid #ffffff; padding: 8px 12px; display: flex; align-items: center;
+    transition: 0.5s; z-index: 1000;
 }
-
 .show-adv { top: 20px !important; }
-
-/* 8. HOTBAR INVENTORY */
-.hotbar-container {
-    position: absolute;
-    bottom: 30px; /* Posisi di bawah */
-    display: flex; /* Membuat item berjejer ke samping */
-    gap: 4px;
-    background: rgba(0, 0, 0, 0.6);
-    border: 4px solid #373737;
-    padding: 4px;
-    z-index: 10;
-}
-
-.hotbar-slot {
-    width: 44px; /* Ukuran kotak slot */
-    height: 44px;
-    background: #8B8B8B;
-    border: 2px solid;
-    border-color: #373737 #FFF #FFF #373737;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-.hotbar-slot img {
-    width: 32px; /* Ukuran icon di dalam kotak */
-    height: 32px;
-    image-rendering: pixelated;
-}
-
-/* 9. MODAL LOOT */
-.mc-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 10000;
-    justify-content: center; align-items: center;
-}
-
-.mc-modal-content {
-    background: #C6C6C6;
-    border: 4px solid;
-    border-color: #FFF #5B5B5B #5B5B5B #FFF;
-    padding: 25px;
-    text-align: center;
-    max-width: 85%;
-    box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
-}
-
-.mc-modal-content p {
-    font-size: 0.8rem;
-    line-height: 1.4;
-    margin-bottom: 20px;
-}
+.version-text { position: absolute; bottom: 5px; left: 5px; color: white; font-size: 0.5rem; }

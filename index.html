@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Naura! - Server Online</title>
+    <title>Happy Birthday Naura!</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
@@ -11,8 +11,8 @@
 
     <div id="start-overlay">
         <div style="text-align: center;">
-            <h2 style="margin-bottom: 10px;">[ SERVER ONLINE ]</h2>
-            <p>Click anywhere to Start Game</p>
+            <h2>[ SERVER ONLINE ]</h2>
+            <p>Click to Start Game</p>
         </div>
     </div>
 
@@ -21,49 +21,41 @@
     <audio id="sfx-challenge"><source src="assets/Challenge_complete.ogg" type="audio/ogg"></audio>
 
     <div class="minecraft-screen">
-        
         <div class="logo-container">
             <h1 class="main-title">OUR<span>CRAFT</span></h1>
             <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
         </div>
 
         <div class="menu-buttons">
-            <button class="mc-button main-btn" onclick="mainEvent()">
-                INSTALL NAURA UPDATE v.19.0
-            </button>
-            <button class="mc-button" onclick="showGift()">
-                OPEN BIRTHDAY CHEST
-            </button>
-            <button class="mc-button disabled">
-                HARDCORE MODE: FOREVER TOGETHER
-            </button>
+            <button class="mc-button" onclick="mainEvent()">INSTALL NAURA UPDATE v.19.0</button>
+            <button class="mc-button" onclick="showGift()">OPEN BIRTHDAY CHEST</button>
+            <button class="mc-button disabled">HARDCORE MODE: FOREVER TOGETHER</button>
+        </div>
+
+        <div class="hotbar-container">
+            <div class="hotbar-slot" onclick="openLoot('Diamond', 'Naura, kamu adalah diamond berhargaku! 💎')">
+                <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png">
+            </div>
+            <div class="hotbar-slot" onclick="openLoot('Steak', 'Terima kasih sudah selalu menjagaku! 🍖')">
+                <img src="https://minecraft.wiki/images/Cooked_Steak_JE4_BE3.png">
+            </div>
+            <div class="hotbar-slot" onclick="openLoot('Compass', 'Arah pulangku adalah kamu. 🧭')">
+                <img src="https://minecraft.wiki/images/Compass_JE3_BE3.gif">
+            </div>
+            <div class="hotbar-slot" onclick="openLoot('Crafting Table', 'You + Me = ❤️')">
+                <img src="https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png">
+            </div>
+            <div class="hotbar-slot"></div>
+            <div class="hotbar-slot"></div>
+            <div class="hotbar-slot active-slot"></div>
         </div>
 
         <div class="version-text">Minecraft Naura Edition v.19.0 (13 Jan 2007)</div>
+    </div>
 
-        <div class="hotbar-container">
-            <div class="hotbar-slot" onclick="openLoot('Diamond', 'Naura, kamu adalah diamond paling berharga di hidupku! 💎')">
-                <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamond">
-            </div>
-            <div class="hotbar-slot" onclick="openLoot('Steak', 'Terima kasih sudah selalu menjagaku dan jadi penyemangatku! 🍖')">
-                <img src="https://minecraft.wiki/images/Cooked_Steak_JE4_BE3.png" alt="Steak">
-            </div>
-            <div class="hotbar-slot" onclick="openLoot('Compass', 'Ke mana pun aku pergi, kamu adalah arah pulangku. 🧭')">
-                <img src="https://minecraft.wiki/images/Compass_JE3_BE3.gif" alt="Compass">
-            </div>
-            <div class="hotbar-slot" onclick="openLoot('Crafting Table', 'You + Me = ❤️. Advancement Made: Falling in Love!')">
-                <img src="https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png" alt="Crafting Table">
-            </div>
-            <div class="hotbar-slot"></div>
-            <div class="hotbar-slot"></div>
-            <div class="hotbar-slot"></div>
-            <div class="hotbar-slot"></div>
-            <div class="hotbar-slot active-slot"></div> 
-        </div>
-
-    </div> <div id="loot-modal" class="mc-modal">
+    <div id="loot-modal" class="mc-modal">
         <div class="mc-modal-content">
-            <h3 id="loot-title" style="color: #FFFF55;">Item Found!</h3>
+            <h3 id="loot-title" style="color: #FFFF55;"></h3>
             <p id="loot-text"></p>
             <button class="mc-button" onclick="closeLoot()">CLOSE</button>
         </div>
@@ -71,7 +63,7 @@
 
     <div id="advancement" class="advancement">
         <div class="adv-iconbox">
-             <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Cake_JE3_BE2.png" alt="Cake">
+             <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Cake_JE3_BE2.png">
         </div>
         <div class="adv-text">
             <span class="adv-title">Advancement Made!</span>
