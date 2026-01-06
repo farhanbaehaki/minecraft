@@ -38,7 +38,7 @@ body, html {
     height: 100vh;
     width: 100%;
     background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('assets/background-potret.jpg');
+                      url('assets/background1.jfif');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -139,17 +139,18 @@ body, html {
 /* 8. HOTBAR INVENTORY */
 .hotbar-container {
     position: absolute;
-    bottom: 25px; /* Sedikit naik agar tidak menumpuk dengan version-text */
-    display: flex;
-    gap: 2px;
-    background: rgba(0, 0, 0, 0.5);
+    bottom: 30px; /* Posisi di bawah */
+    display: flex; /* Membuat item berjejer ke samping */
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6);
     border: 4px solid #373737;
-    padding: 2px;
+    padding: 4px;
     z-index: 10;
 }
 
 .hotbar-slot {
-    width: 40px; height: 40px;
+    width: 44px; /* Ukuran kotak slot */
+    height: 44px;
     background: #8B8B8B;
     border: 2px solid;
     border-color: #373737 #FFF #FFF #373737;
@@ -159,11 +160,10 @@ body, html {
     cursor: pointer;
 }
 
-.hotbar-slot img { width: 28px; image-rendering: pixelated; }
-
-.active-slot {
-    outline: 4px solid white;
-    outline-offset: -2px;
+.hotbar-slot img {
+    width: 32px; /* Ukuran icon di dalam kotak */
+    height: 32px;
+    image-rendering: pixelated;
 }
 
 /* 9. MODAL LOOT */
