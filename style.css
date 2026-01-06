@@ -1,8 +1,10 @@
+/* FONT SETUP */
 @font-face {
   font-family: "Minecraftia";
   src: url("Minecraftia.ttf") format("truetype");
 }
 
+/* DASAR HALAMAN */
 body,
 html {
   margin: 0;
@@ -11,131 +13,124 @@ html {
   width: 100%;
   font-family: "Minecraftia", sans-serif;
   overflow: hidden;
-  background: #000;
+  background-color: #1a1a1a;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Background Video */
-#bg-video {
+/* OVERLAY & LOADING */
+#start-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  z-index: -1;
-}
-
-/* Overlay & Loading */
-#start-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.95);
   color: #ffff55;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 9999;
   cursor: pointer;
-}
-.dirt-bg {
-  position: fixed;
-  inset: 0;
-  background: #31211b
-    url("https://www.transparenttextures.com/patterns/dirt.png");
-  z-index: 9998;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-#loading-bar-border {
-  width: 200px;
-  height: 15px;
-  border: 2px solid white;
-  padding: 2px;
-}
-#loading-bar {
-  height: 100%;
-  background: #55ff55;
-  width: 0%;
-  transition: width 0.1s;
+  text-align: center;
 }
 
-/* Minecraft UI */
+#loading-text {
+  font-size: 0.8rem;
+  text-shadow: 2px 2px #000;
+  margin-top: 10px;
+}
+
+/* LAYAR UTAMA */
 .minecraft-screen {
   display: none;
   height: 100vh;
+  width: 100vw;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("assets/background1.jfif");
+  background-size: cover;
+  background-position: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: 1s;
-  background-image: url("assets/background1.jpg");
-  background-size: cover;
-  background-position: center;
+  transition: opacity 0.8s ease;
 }
+
 .show-content {
   display: flex !important;
   opacity: 1 !important;
 }
 
-#chat-box {
-    position: absolute;
-    top: 20px; /* Pindah ke atas */
-    left: 10px;
-    width: 250px;
-    z-index: 10; /* Pastikan di atas elemen lain */
-    pointer-events: none;
+/* LOGO & SPLASH */
+.logo-container {
+  text-align: center;
+  position: relative;
+  margin-bottom: 50px;
+}
+.main-title {
+  color: #afafaf;
+  font-size: clamp(1.8rem, 10vw, 4rem);
+  text-shadow: 4px 4px 0px #3f3f3f;
+}
+.main-title span {
+  color: #55ff55;
+}
+.splash-text {
+  color: #ffff55;
+  font-size: clamp(0.6rem, 3vw, 0.9rem);
+  position: absolute;
+  right: -20px;
+  top: -15px;
+  transform: rotate(-20deg);
+  animation: splashAnim 0.6s infinite alternate;
 }
 
-.chat-msg {
-    background: rgba(0, 0, 0, 0.6);
-    padding: 5px 10px;
-    margin-bottom: 5px;
-    font-size: 0.65rem; /* Ukuran pas untuk HP */
-    color: #FFF;
-    text-shadow: 1px 1px #000;
-    border-radius: 2px;
-}
-@keyframes chatIn {
+@keyframes splashAnim {
   from {
-    transform: translateX(-20px);
-    opacity: 0;
+    transform: rotate(-20deg) scale(1);
+  }
+  to {
+    transform: rotate(-20deg) scale(1.1);
   }
 }
 
-/* Status Bars & Hotbar */
-.ui-container {
-  position: absolute;
-  bottom: 10px;
+/* BUTTONS */
+.menu-buttons {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  width: 100%;
+  gap: 15px;
+  width: 280px;
 }
-.status-bars {
-  display: flex;
-  justify-content: space-between;
-  width: 280px; /* Perkecil ukuran untuk HP */
-  margin-bottom: 2px;
+.mc-button {
+  background-color: #7e7e7e;
+  border: 3px solid;
+  border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  text-shadow: 2px 2px #333;
 }
-.mc-icon {
-  width: 18px;
-  height: 18px;
-  image-rendering: pixelated;
-  margin: 0 -1px;
+.mc-button:active {
+  transform: scale(0.95);
+  background-color: #5b5b5b;
 }
+
+/* HOTBAR */
 .hotbar-container {
+  position: absolute;
+  bottom: 30px;
   display: flex;
-  gap: 2px;
+  gap: 4px;
   padding: 4px;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   border: 4px solid #373737;
 }
 .hotbar-slot {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   background: #8b8b8b;
   border: 2px solid;
   border-color: #373737 #fff #fff #373737;
@@ -146,7 +141,8 @@ html {
   position: relative;
 }
 .hotbar-slot img {
-  width: 30px;
+  width: 28px;
+  height: 28px;
   image-rendering: pixelated;
 }
 .active-slot {
@@ -154,62 +150,41 @@ html {
   outline-offset: -2px;
 }
 
-/* Tooltip */
+/* TOOLTIP */
 .tooltip {
   visibility: hidden;
+  background: black;
+  color: white;
+  padding: 5px;
   position: absolute;
   bottom: 60px;
-  background: black;
-  border: 1px solid white;
-  padding: 5px;
-  font-size: 0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.5rem;
   white-space: nowrap;
+  border: 1px solid white;
 }
 .hotbar-slot:hover .tooltip {
   visibility: visible;
 }
+.hotbar-slot:hover {
+  background: #aaaaaa;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
 
-/* Logo, Modal, Advancement (sama seperti sebelumnya tapi lebih rapi) */
-.main-title {
-  font-size: 3.5rem;
-  color: #aaa;
-  text-shadow: 4px 4px #333;
-}
-.main-title span {
-  color: #5f5;
-}
-.splash-text {
-  color: #ff5;
-  position: absolute;
-  right: -20px;
-  top: -10px;
-  transform: rotate(-20deg);
-  animation: splash 0.5s infinite alternate;
-}
-@keyframes splash {
-  to {
-    transform: rotate(-20deg) scale(1.1);
-  }
-}
-.mc-button {
-  background: #7e7e7e;
-  border: 3px solid;
-  border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
-  color: white;
-  padding: 12px 20px;
-  cursor: pointer;
-  font-family: inherit;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px #000;
-}
+/* MODAL & ADVANCEMENT */
 .mc-modal {
   display: none;
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
   z-index: 10000;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 .mc-modal-content {
   background: #c6c6c6;
@@ -217,29 +192,45 @@ html {
   border-color: #fff #5b5b5b #5b5b5b #fff;
   padding: 25px;
   text-align: center;
-  width: 80%;
-  max-width: 400px;
-  color: #333; /* Teks pesan jadi kontras dan jelas */
+  width: 85%;
+  max-width: 350px;
 }
+#loot-text {
+  white-space: pre-line;
+  font-size: 0.8rem;
+  color: #333;
+}
+
 .advancement {
   position: fixed;
-  top: -100px;
-  right: 20px;
+  top: -150px;
+  right: 15px;
   background: #212121;
-  border: 3px solid white;
-  padding: 10px;
+  border: 3px solid #ffffff;
+  padding: 8px 12px;
   display: flex;
   align-items: center;
   gap: 10px;
-  transition: 0.6s;
-  z-index: 10001;
+  transition: top 0.6s ease-out;
+  z-index: 10000;
 }
 .show-adv {
   top: 20px !important;
 }
+.adv-title {
+  color: #ffaa00;
+  font-size: 0.7rem;
+  display: block;
+}
+.adv-desc {
+  color: #ffffff;
+  font-size: 0.65rem;
+}
 
-.mc-button:active {
-  background: #5b5b5b;
-  border-color: #373737 #dbdbdb #dbdbdb #373737;
-  transform: translateY(2px); /* Memberi efek klik */
+.version-text {
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.5rem;
 }
