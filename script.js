@@ -1,77 +1,115 @@
+// --- 1. REFERENSI ELEMEN ---
 const bgm = document.getElementById('bgm');
 const sfxClick = document.getElementById('sfx-click');
 const sfxChallenge = document.getElementById('sfx-challenge');
 const startOverlay = document.getElementById('start-overlay');
 const mainScreen = document.querySelector('.minecraft-screen');
+const lootModal = document.getElementById('loot-modal');
 
-// Klik awal untuk masuk
+// --- 2. MEKANIK START OVERLAY ---
+// Menangani klik pertama untuk memulai musik dan masuk ke menu
 startOverlay.addEventListener('click', () => {
-    startOverlay.style.display = 'none';
-    mainScreen.classList.add('show-content');
+    startOverlay.style.opacity = '0';
+    setTimeout(() => {
+        startOverlay.style.display = 'none';
+        mainScreen.classList.add('show-content');
+    }, 500);
+
+    // Menjalankan Audio
     bgm.volume = 0.3;
-    bgm.play().catch(e => console.log("Audio blocked"));
+    bgm.play().catch(err => console.log("Audio play dipending: ", err));
     sfxClick.play();
 });
 
-// Efek Tombol Update (Level Up)
+// --- 3. MEKANIK LEVEL UP (TOMBOL UTAMA) ---
 function mainEvent() {
+    sfxClick.currentTime = 0;
     sfxClick.play();
-    confetti({
-        particleCount: 150, spread: 70, origin: { y: 0.6 },
-        colors: ['#ff0000', '#00ff00', '#ffff00', '#ff69b4']
-    });
 
+    // Efek Kembang Api (Confetti)
+    const duration = 3 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+
+        if (timeLeft <= 0) {
+            return clearInterval(interval);
+        }
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { 
+            particleCount, 
+            origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } 
+        }));
+        confetti(Object.assign({}, defaults, { 
+            particleCount, 
+            origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } 
+        }));
+    }, 250);
+
+    // Munculkan Notifikasi Advancement
     setTimeout(() => {
+        sfxChallenge.currentTime = 0;
         sfxChallenge.play();
-        document.getElementById('advancement').classList.add('show-adv');
-    }, 300);
-
-    setTimeout(() => {
-        document.getElementById('advancement').classList.remove('show-adv');
-    }, 7000);
+        const adv = document.getElementById('advancement');
+        adv.classList.add('show-adv');
+        
+        // Sembunyikan setelah 7 detik
+        setTimeout(() => {
+            adv.classList.remove('show-adv');
+        }, 7000);
+    }, 500);
 }
 
-function showGift() {
+// --- 4. MEKANIK INVENTORY & LOOT SYSTEM ---
+function openLoot(title, message) {
+    sfxClick.currentTime = 0;
     sfxClick.play();
-    alert("🎁 [SERVER] A gift for Naura has been spawned! \nCek di dunia nyata sekarang ya! ❤️");
+
+    // Isi konten modal
+    document.getElementById('loot-title').innerText = title;
+    document.getElementById('loot-text').innerText = message;
+
+    // Tampilkan Modal
+    lootModal.style.display = 'flex';
 }
 
-// Splash Text Naura
+function closeLoot() {
+    sfxClick.currentTime = 0;
+    sfxClick.play();
+    lootModal.style.display = 'none';
+}
+
+// --- 5. MEKANIK CHEST ALERT ---
+function showGift() {
+    sfxClick.currentTime = 0;
+    sfxClick.play();
+    alert("🎁 [SERVER] A Special Chest has been spawned in the real world!\nCek kado kamu sekarang ya, Naura! ❤️");
+}
+
+// --- 6. MEKANIK DYNAMIC SPLASH TEXT ---
 const quotes = [
     "Happy Birthday, Naura!",
     "Naura Update v.19.0",
     "13 Januari Special!",
-    "Naura is the best player!",
+    "You are my Diamond!",
     "I love you, Naura!",
-    "Crafted for Naura"
+    "Level Up: 19!"
 ];
 
 setInterval(() => {
     const splash = document.getElementById('splash');
-    splash.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+    if (splash) {
+        splash.style.transform = "rotate(-20deg) scale(0)";
+        setTimeout(() => {
+            splash.innerText = quotes[Math.floor(Math.random() * quotes.length)];
+            splash.style.transform = "rotate(-20deg) scale(1)";
+        }, 200);
+    }
 }, 3000);
-
-function openLoot(title, message) {
-    sfxClick.play();
-    document.getElementById('loot-title').innerText = title;
-    document.getElementById('loot-text').innerText = message;
-    document.getElementById('loot-modal').style.display = 'flex';
-}
-
-function closeLoot() {
-    sfxClick.play();
-    document.getElementById('loot-modal').style.display = 'none';
-    
-    // Advancement khusus saat dia baca semua pesan!
-    showAdvancement("Loot Found!", "Advancement Made: Falling in Love!");
-}
-
-function showAdvancement(title, desc) {
-    const adv = document.getElementById('advancement');
-    document.querySelector('.adv-title').innerText = title;
-    document.getElementById('adv-desc-text').innerText = desc;
-    
-    sfxChallenge.play();
-    adv.classList.add('show-adv');
-    setTimeout(() => adv.classList.remove('show-adv'), 7000);
-}
