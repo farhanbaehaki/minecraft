@@ -94,28 +94,38 @@ html {
   }
 }
 
-/* 6. TOMBOL MENU */
+/* 6. TOMBOL MENU - PERBAIKAN POSISI TENGAH */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 280px;      /* Lebar kotak tombol */
+    max-width: 85%;    /* Agar tidak melebar di HP kecil */
+    z-index: 2;
+    margin: 0 auto;    /* INI KUNCINYA: Memaksa kontainer ke tengah */
+    align-items: center; /* Memastikan isi di dalamnya rata tengah */
+}
+
 .mc-button {
-  background: #7e7e7e;
-  border: 3px solid;
-  border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
-  color: white;
-  padding: 12px;
-  width: 260px;
-  max-width: 85%;
-  font-family: inherit;
-  font-size: 0.8rem;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px #333;
-  cursor: pointer;
+    background: #7e7e7e; 
+    border: 3px solid; 
+    border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
+    color: white; 
+    padding: 14px 10px; 
+    width: 100%;       /* Tombol akan memenuhi lebar 280px di atas */
+    font-family: inherit; 
+    font-size: 0.8rem;
+    text-shadow: 2px 2px #333;
+    cursor: pointer;
+    display: block;    /* Memastikan tombol berperilaku sebagai kotak */
+    box-sizing: border-box;
 }
 
-.mc-button:active {
-  background: #5b5b5b;
-  transform: scale(0.95);
-  border-color: #5b5b5b #dbdbdb #dbdbdb #5b5b5b;
+.mc-button:active { 
+    background: #5b5b5b; 
+    transform: scale(0.95); 
+    border-color: #5b5b5b #dbdbdb #dbdbdb #5b5b5b;
 }
-
 /* 7. HOTBAR (SAFE AREA HP) */
 .hotbar-container {
   position: absolute;
