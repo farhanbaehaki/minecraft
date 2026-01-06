@@ -1,30 +1,88 @@
-<div class="ui-status-container" style="position: absolute; bottom: 80px; display: flex; justify-content: space-between; width: 280px; image-rendering: pixelated;">
-    <div class="health-bar">
-        <script>
-            for(let i=0; i<10; i++) document.write('<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart.png" style="width:18px; margin-right:-1px;">');
-        </script>
-    </div>
-    <div class="hunger-bar">
-        <script>
-            for(let i=0; i<10; i++) document.write('<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/hunger.png" style="width:18px; margin-left:-1px;">');
-        </script>
-    </div>
-</div>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Naura!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
 
-<div class="hotbar-container">
-    <div class="hotbar-slot" onclick="openLoot('[Stone Age]', 'Ingat saat kamu memulai petualangan baru tahun lalu? Itu adalah awal dari keberanianmu di level 18! 🪨')">
-        <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/iron_pickaxe.png" alt="Pickaxe">
+    <div id="start-overlay">
+        <div style="text-align: center;">
+            <h2>[ SERVER ONLINE ]</h2>
+            <p>Click to Start Game</p>
+        </div>
     </div>
-    <div class="hotbar-slot" onclick="openLoot('[Suit Up]', 'Kamu selalu tampil mempesona. Bahkan armor terkuat pun tidak sebanding dengan senyummu! ✨')">
-        <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/iron_chestplate.png" alt="Armor">
+
+    <audio id="bgm" loop><source src="assets/Haggstrom.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-click"><source src="assets/Click.mp3" type="audio/mpeg"></audio>
+    <audio id="sfx-challenge"><source src="assets/Challenge_complete.ogg" type="audio/ogg"></audio>
+
+    <div class="minecraft-screen">
+        
+        <div class="logo-container">
+            <h1 class="main-title">OUR<span>CRAFT</span></h1>
+            <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
+        </div>
+        
+        <div class="menu-buttons">
+            <button class="mc-button" onclick="mainEvent()">ENTER NEW AGE (v.19.0)</button>
+            <button class="mc-button" onclick="showGift()">CLAIM BIRTHDAY LOOT</button>
+        </div>
+
+        <div class="hotbar-container">
+            <div class="hotbar-slot" onclick="openLoot('[Stone Age]', 'Ingat saat kamu memulai petualangan baru tahun lalu? Itu adalah awal dari keberanianmu di level 18! 🪨')">
+                <img src="https://minecraft.wiki/images/Stone_Pickaxe_JE3_BE2.png" alt="Pickaxe">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('[Suit Up]', 'Kamu selalu tampil mempesona di setiap keadaan. Bahkan armor terkuat pun tidak sebanding dengan kekuatan senyummu! ✨')">
+                <img src="https://minecraft.wiki/images/Iron_Chestplate_JE2_BE2.png" alt="Armor">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('[Cover Me With Diamonds]', 'Momen paling berharga bagiku adalah setiap detik yang aku habis can bersamamu. Kamu adalah diamond-ku. 💎')">
+                <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamond">
+            </div>
+            
+            <div class="hotbar-slot" onclick="eatCake()">
+                <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('[Great View From Up Here]', 'Level 19 punya pemandangan yang lebih indah. Jangan takut melangkah, aku selalu ada di sampingmu. 🔭')">
+                <img src="https://minecraft.wiki/images/Spyglass_JE3_BE2.png" alt="Spyglass">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('Pink Tulip', 'Sama seperti bunga ini, cintaku mekar secara alami di setiap koordinat hidupmu. 🌷')">
+                <img src="https://minecraft.wiki/images/Pink_Tulip_JE3_BE2.png" alt="Tulip">
+            </div>
+            
+            <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. Detak yang menenangkan di setiap badai. 🌊')">
+                <img src="https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE1.png" alt="Heart">
+            </div>
+        </div>
+
+        <div class="version-text">Minecraft Naura Edition v.19.0 (13 Jan 2007)</div>
     </div>
-    <div class="hotbar-slot" onclick="eatCake()">
-        <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake">
+
+    <div id="loot-modal" class="mc-modal">
+        <div class="mc-modal-content">
+            <h3 id="loot-title" style="color: #FFFF55; margin-top: 0;"></h3>
+            <div id="loot-text" style="font-size: 0.85rem; line-height: 1.6; white-space: pre-line;"></div>
+            <button class="mc-button" style="margin-top: 15px;" onclick="closeLoot()">CLOSE</button>
+        </div>
     </div>
-    <div class="hotbar-slot" onclick="openLoot('[Diamond]', 'Momen paling berharga bagiku adalah setiap detik bersamamu. Kamu adalah diamond-ku. 💎')">
-        <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/diamond.png" alt="Diamond">
+
+    <div id="advancement" class="advancement">
+        <div class="adv-iconbox">
+             <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Cake_JE3_BE2.png" alt="Cake">
+        </div>
+        <div class="adv-text">
+            <span class="adv-title">Advancement Made!</span>
+            <span class="adv-desc" id="adv-desc-text">Level 19: The Birthday Girl!</span>
+        </div>
     </div>
-    <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. ❤️')">
-        <img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart_of_the_sea.png" alt="Heart">
-    </div>
-</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
