@@ -19,8 +19,12 @@ function playSfx(audio) {
 
 // 3. LOGIKA START GAME
 startOverlay.addEventListener("click", () => {
+ const video = document.getElementById("bg-video");
+  if (video) video.play();
+
   startOverlay.style.opacity = "0";
   setTimeout(() => {
+    
     startOverlay.style.display = "none";
     mainScreen.classList.add("show-content");
     setTimeout(() => (mainScreen.style.opacity = "1"), 50);
