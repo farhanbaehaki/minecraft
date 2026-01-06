@@ -1,112 +1,111 @@
-/* --- GLOBAL RESET & FONT --- */
+/* Menggunakan font pixel (bisa diganti dengan font Minecraftia jika ada) */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* {
-    box-sizing: border-box;
-    cursor: url('https://cur.cursors-4u.net/games/gam-4/gam388.cur'), auto !important;
-}
-
-body {
+body, html {
     margin: 0;
-    height: 100vh;
-    width: 100%;
-    overflow: hidden;
+    padding: 0;
+    height: 100%;
     font-family: 'Press Start 2P', cursive;
-    background: url('assets/background.jfif') no-repeat center center fixed;
+    overflow: hidden;
+    background-color: #1a1a1a;
+}
+
+.minecraft-screen {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1627634777217-c864268db30c?auto=format&fit=crop&q=80&w=1000') no-repeat center center fixed;
     background-size: cover;
+    height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-/* --- SYSTEM UI --- */
-#world-transition {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: black; z-index: 9000; opacity: 0; pointer-events: none;
-    transition: opacity 0.5s ease;
+/* Judul Utama */
+.logo-container {
+    text-align: center;
+    position: relative;
+    margin-bottom: 50px;
 }
 
-.container {
-    position: fixed; width: 100%; height: 100vh;
-    display: flex; justify-content: center; align-items: center;
-    z-index: 10;
+.main-title {
+    color: #fff;
+    font-size: 3rem;
+    text-shadow: 4px 4px #333;
+    letter-spacing: 5px;
 }
 
-.hidden { display: none !important; }
+.main-title span { color: #55FF55; }
 
-/* --- MOJANG LOADING --- */
-#loading-screen {
-    position: fixed; width: 100%; height: 100%; background: #ef323d;
-    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
-    transition: opacity 0.8s ease;
-}
-.mojang-logo {
-    width: 200px; height: 50px;
-    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Mojang_Studios_logo.svg/1024px-Mojang_Studios_logo.svg.png') no-repeat center;
-    background-size: contain;
-}
-.loading-bar-container { width: 150px; height: 4px; background: rgba(255,255,255,0.3); margin-top: 30px; }
-.loading-bar { width: 0%; height: 100%; background: #fff; animation: load 2s forwards; }
-@keyframes load { to { width: 100%; } }
-
-/* --- CARDS & GUI --- */
-.mc-card, .reward-card {
-    background: rgba(198, 198, 198, 0.95);
-    border: 4px solid #ffffff;
-    border-top-color: #ffffff; border-left-color: #ffffff;
-    border-right-color: #555; border-bottom-color: #555;
-    padding: 30px; text-align: center; max-width: 90%;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+/* Splash Text Kuning */
+.splash-text {
+    color: #FFFF55;
+    font-size: 1.2rem;
+    position: absolute;
+    right: -50px;
+    bottom: -10px;
+    transform: rotate(-20deg);
+    animation: splashAnim 0.5s infinite alternate;
+    text-shadow: 2px 2px #333;
 }
 
-.mc-font-title { color: #3f3f3f; font-size: 16px; margin-bottom: 20px; }
-.mc-font-small { color: #555; font-size: 9px; line-height: 1.5; }
-.mc-font-white { color: white; text-shadow: 2px 2px #000; font-size: 12px; }
-
-/* --- INPUTS & BUTTONS --- */
-.mc-input {
-    font-family: 'Press Start 2P'; padding: 12px; border: 3px solid #333;
-    width: 200px; font-size: 12px; margin: 15px 0; outline: none;
-}
-.mc-button, .mc-button-small {
-    font-family: 'Press Start 2P'; background: #aaa;
-    border: 3px solid #333; border-top-color: #fff; border-left-color: #fff;
-    padding: 12px 20px; font-size: 10px; cursor: pointer;
-}
-.mc-button:hover { background: #55FF55; }
-.mc-button:active { border: 3px solid #fff; border-top-color: #333; border-left-color: #333; }
-
-/* --- GAMEPLAY: SHULKER --- */
-.game-scene { text-align: center; }
-#shulker-container { cursor: pointer; display: flex; flex-direction: column; align-items: center; }
-.shulker-pixel {
-    width: 150px; image-rendering: pixelated;
-    filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
-    transition: transform 0.1s;
-}
-#hit-counter { font-size: 30px; color: #ff55ff; margin-top: 20px; text-shadow: 4px 4px #000; }
-
-.shake-hit { animation: shake 0.2s ease-in-out; }
-@keyframes shake {
-    0%, 100% { transform: translate(0,0) rotate(0); }
-    25% { transform: translate(8px, -8px) rotate(5deg); }
-    75% { transform: translate(-8px, 8px) rotate(-5deg); }
+@keyframes splashAnim {
+    from { transform: rotate(-20deg) scale(1); }
+    to { transform: rotate(-20deg) scale(1.1); }
 }
 
-/* --- REWARD --- */
-.reward-icon { width: 80px; margin-bottom: 20px; animation: float 2s infinite ease-in-out; }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-/* --- ACHIEVEMENT --- */
-.achievement-toast {
-    position: fixed; top: 20px; right: 20px; background: #212121;
-    border: 3px solid #000; padding: 10px; display: flex; align-items: center;
-    z-index: 9500; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Tombol Minecraft */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 400px;
 }
-.hidden-toast { transform: translateX(250%); }
-.achievement-icon img { width: 30px; image-rendering: pixelated; }
-.yellow-text { color: #ffff55; font-size: 8px; display: block; }
-.white-text { color: #fff; font-size: 9px; }
 
-.error-text { color: #aa0000; font-size: 8px; margin-top: 10px; }
-.music-controls { position: fixed; bottom: 20px; right: 20px; }
+.mc-button {
+    background: #AAAAAA;
+    border: 4px solid;
+    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    color: #FFFFFF;
+    padding: 15px;
+    cursor: pointer;
+    text-shadow: 2px 2px #333;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.8rem;
+    transition: 0.1s;
+}
+
+.mc-button:hover {
+    background: #55FF55;
+    border-color: #AAFFAA #00AA00 #00AA00 #AAFFAA;
+}
+
+.disabled { opacity: 0.6; cursor: not-allowed; }
+
+/* Advancement Toast */
+.advancement {
+    position: fixed;
+    top: -100px;
+    right: 20px;
+    background: #212121;
+    border: 3px solid #000;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.5s ease-in-out;
+    width: 320px;
+    z-index: 100;
+}
+
+.adv-icon { font-size: 2rem; }
+.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; }
+.adv-desc { color: #FFFFFF; font-size: 0.8rem; }
+
+.show-adv { top: 20px !important; }
+
+/* Status Bar */
+.status-bar {
+    position: absolute;
+    bottom: 20px;
+}

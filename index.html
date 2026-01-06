@@ -2,73 +2,42 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minecraft HD - Heart Quest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! - Level Up</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div id="world-transition"></div>
+    <div class="minecraft-screen">
+        <div class="logo-container">
+            <h1 class="main-title">OUR<span>WORLD</span></h1>
+            <div class="splash-text" id="splash">Happy Birthday, Sayang!</div>
+        </div>
 
-    <div id="loading-screen">
-        <div class="mojang-logo"></div>
-        <div class="loading-bar-container">
-            <div class="loading-bar"></div>
+        <div class="menu-buttons">
+            <button class="mc-button" onclick="triggerAdvancement()">
+                PLAY WORLD (LEVEL UP!)
+            </button>
+            <button class="mc-button" onclick="showGift()">
+                OPEN BIRTHDAY CHEST
+            </button>
+            <button class="mc-button disabled">
+                HARDCORE MODE: FOREVER TOGETHER
+            </button>
+        </div>
+
+        <div class="status-bar">
+            <div class="hearts" id="hp-bar">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
         </div>
     </div>
 
-    <div id="achievement" class="achievement-toast hidden-toast">
-        <div class="achievement-icon">
-            <img src="https://minecraft.wiki/images/Diamond_Render.png" alt="Diamond">
-        </div>
-        <div class="achievement-text">
-            <span class="yellow-text">Achievement Get!</span>
-            <span class="white-text">The Hidden Heart</span>
+    <div id="advancement" class="advancement">
+        <div class="adv-icon">🏆</div>
+        <div class="adv-text">
+            <span class="adv-title">Advancement Made!</span>
+            <span class="adv-desc">Level 24: The Best Girlfriend</span>
         </div>
     </div>
-
-    <div id="login-page" class="container">
-        <div class="mc-card">
-            <h1 class="mc-font-title">Secure World</h1>
-            <p class="mc-font-small">Enter secret key to spawn:</p>
-            <div class="input-group">
-                <input type="password" id="passwordInput" class="mc-input" placeholder="...">
-                <button onclick="checkPassword()" class="mc-button">SPAWN</button>
-            </div>
-            <p id="errorMessage" class="error-text"></p>
-        </div>
-    </div>
-
-    <div id="main-content" class="container hidden">
-        <div class="game-scene">
-            <h2 id="instruction" class="mc-font-white">Ketuk Shulker 10x!</h2>
-            
-            <div id="shulker-container" onclick="hitShulker()">
-                <img src="https://minecraft.wiki/images/Purple_Shulker_Box_Render.png" id="shulker-box" class="shulker-pixel">
-                <div id="hit-counter">10</div>
-            </div>
-
-            <div id="reward-display" class="hidden">
-                <div class="reward-card">
-                    <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_Render.png" class="reward-icon">
-                    <h2 class="mc-font-title" style="color: #ffff55;">QUEST CLEAR!</h2>
-                    <p class="mc-font-small">Selamat Naura! Kamu menemukan Diamond Heart milik Farhan.</p>
-                    <p class="mc-font-small" style="color: #55FF55; margin-top: 10px;">[Hadiah: Voucher Makan Bareng]</p>
-                    <button onclick="location.reload()" class="mc-button-small" style="margin-top: 20px;">Main Lagi</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="music-controls">
-            <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
-        </div>
-    </div>
-
-    <audio id="sound-click" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"></audio>
-    <audio id="sound-pop" src="https://www.myinstants.com/media/sounds/minecraft_pop.mp3"></audio>
-    <audio id="sound-levelup" src="https://www.myinstants.com/media/sounds/level-up-minecraft.mp3"></audio>
-    <audio id="bgm" loop src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=439366"></audio>
 
     <script src="script.js"></script>
 </body>
