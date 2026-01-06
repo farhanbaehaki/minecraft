@@ -1,174 +1,88 @@
-/* Mendaftarkan Font Minecraftia (Pastikan file .ttf ada di folder proyek) */
 @font-face {
     font-family: 'Minecraftia';
     src: url('Minecraftia.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
-/* Jika belum download fontnya, pakai alternatif ini (hapus tanda komentar di bawah): */
-/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
-
-
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* Gunakan 'Press Start 2P' jika belum download Minecraftia.ttf */
-    font-family: 'Minecraftia', 'Press Start 2P', cursive; 
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Minecraftia', sans-serif;
     overflow: hidden;
     background-color: #1a1a1a;
-    user-select: none; /* Agar teks tidak bisa diblok */
+    user-select: none;
 }
 
 /* Overlay Start */
 #start-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    color: white;
+    background: rgba(0,0,0,0.9);
+    color: #FFFF55;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 999;
+    z-index: 9999;
     cursor: pointer;
 }
-#start-overlay p {
-    animation: blink 1s infinite;
-}
+
+#start-overlay p { animation: blink 1s infinite; font-size: 1.2rem; }
 @keyframes blink { 50% { opacity: 0.5; } }
 
-
-/* Layar Utama */
+/* Main Screen */
 .minecraft-screen {
-    /* GANTI 'assets/bg.jpg' DENGAN GAMBAR KAMU */
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('assets/bg.jpg') no-repeat center center fixed;
+    display: none; /* Disembunyikan sampai klik pertama */
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                      url('assets/background.jpg');
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     height: 100vh;
-    display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    image-rendering: pixelated; /* Agar gambar terlihat tajam ala pixel */
+    opacity: 0;
+    transition: opacity 0.8s ease;
 }
 
-/* Logo */
-.logo-container {
-    text-align: center;
-    position: relative;
-    margin-bottom: 60px;
-}
+/* Class untuk memunculkan layar lewat JS */
+.show-content { display: flex !important; opacity: 1 !important; }
 
-.main-title {
-    color: #AFAFAF;
-    font-size: 4rem;
-    text-shadow: 4px 4px 0px #3F3F3F;
-    margin: 0;
-    letter-spacing: 2px;
-}
+.logo-container { text-align: center; position: relative; margin-bottom: 60px; }
+.main-title { color: #AFAFAF; font-size: clamp(2rem, 10vw, 4rem); text-shadow: 4px 4px 0px #3F3F3F; margin: 0; }
+.main-title span { color: #55FF55; }
 
-.main-title span { color: #AFAFAF; }
-
-/* Splash Text Kuning yang Bergoyang */
 .splash-text {
-    color: #FFFF55;
-    font-size: 1rem;
-    position: absolute;
-    right: -60px;
-    top: 0px;
-    transform: rotate(-20deg);
+    color: #FFFF55; font-size: 1rem; position: absolute;
+    right: -60px; top: 0px; transform: rotate(-20deg);
     animation: splashAnim 0.6s infinite alternate ease-in-out;
-    text-shadow: 2px 2px 0px #3F3F3F;
-    width: 300px;
-    text-align: center;
+    text-shadow: 2px 2px 0px #3F3F3F; width: 300px;
 }
 
-@keyframes splashAnim {
-    from { transform: rotate(-20deg) scale(1); }
-    to { transform: rotate(-20deg) scale(1.05); }
-}
+@keyframes splashAnim { from { transform: rotate(-20deg) scale(1); } to { transform: rotate(-20deg) scale(1.05); } }
 
-/* Tombol Minecraft yang Otentik */
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    width: 400px;
-    max-width: 90%;
-}
+.menu-buttons { display: flex; flex-direction: column; gap: 12px; width: 400px; max-width: 90%; }
 
 .mc-button {
-    /* Warna dasar tombol */
-    background-color: #7e7e7e; 
-    /* Border 3D: Atas/Kiri Terang, Bawah/Kanan Gelap */
-    border-top: 3px solid #dbdbdb;
-    border-left: 3px solid #dbdbdb;
-    border-bottom: 3px solid #5b5b5b;
-    border-right: 3px solid #5b5b5b;
-    
-    color: #FFFFFF;
-    padding: 15px;
-    cursor: pointer;
-    text-shadow: 2px 2px 0px #3F3F3F;
-    /* Gunakan 'Press Start 2P' jika belum download Minecraftia.ttf */
-    font-family: 'Minecraftia', 'Press Start 2P', cursive;
-    font-size: 0.9rem;
-    text-align: center;
-    position: relative;
+    background-color: #7e7e7e;
+    border-top: 3px solid #dbdbdb; border-left: 3px solid #dbdbdb;
+    border-bottom: 3px solid #5b5b5b; border-right: 3px solid #5b5b5b;
+    color: #FFFFFF; padding: 15px; cursor: pointer;
+    text-shadow: 2px 2px 0px #3F3F3F; font-family: inherit; font-size: 0.9rem;
 }
 
-/* Efek Hover Tombol */
-.mc-button:hover {
-    background-color: #969696; /* Sedikit lebih terang */
-    border-top: 3px solid #ffffff;
-    border-left: 3px solid #ffffff;
-    border-bottom: 3px solid #747474;
-    border-right: 3px solid #747474;
-}
+.mc-button:hover { background-color: #969696; border-color: #ffffff #747474 #747474 #ffffff; }
+.mc-button:active { background-color: #5b5b5b; border-color: #5b5b5b #5b5b5b #dbdbdb #dbdbdb; }
 
-/* Efek Klik Tombol (Active) */
-.mc-button:active {
-    background-color: #5b5b5b;
-    border-top: 3px solid #5b5b5b;
-    border-left: 3px solid #5b5b5b;
-    border-bottom: 3px solid #dbdbdb;
-    border-right: 3px solid #dbdbdb;
-    color: #cfcfcf;
-}
-
-.disabled { opacity: 0.7; cursor: not-allowed; color: #a0a0a0; }
+.disabled { opacity: 0.6; cursor: not-allowed; }
 .version-text { position: absolute; bottom: 10px; left: 10px; color: white; font-size: 0.7rem; }
 
-
-/* Advancement Toast Pop-up */
+/* Advancement Pop-up */
 .advancement {
-    position: fixed;
-    top: -100px; /* Sembunyi di atas layar */
-    right: 20px;
-    background: #212121;
-    border: 2px solid #ffffff;
-    outline: 2px solid #000000; /* Double border trick */
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efek mental */
-    width: auto;
-    z-index: 100;
-    box-shadow: 4px 4px 0px #000;
+    position: fixed; top: -100px; right: 20px;
+    background: #212121; border: 2px solid #ffffff;
+    padding: 8px 12px; display: flex; align-items: center; gap: 10px;
+    transition: top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28); z-index: 1000;
 }
-
-.adv-iconbox {
-    width: 40px; height: 40px;
-    background: #5b5b5b;
-    border: 2px solid #dbdbdb;
-    display: flex; align-items: center; justify-content: center;
-}
-.adv-iconbox img { width: 32px; image-rendering: pixelated; }
-
-.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; margin-bottom: 4px; }
-.adv-desc { color: #FFFFFF; font-size: 0.8rem; white-space: nowrap; }
-
-/* Class untuk memunculkan advancement */
 .show-adv { top: 20px !important; }
+.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; }
+.adv-desc { color: #FFFFFF; font-size: 0.8rem; }
