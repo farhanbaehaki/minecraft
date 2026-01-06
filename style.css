@@ -60,10 +60,10 @@ html {
   min-height: 100%;
   width: auto;
   height: auto;
-  z-index: 0;
+  z-index: -1;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  filter: brightness(0.6);
+  filter: brightness(0.5);
   pointer-events: none; /* Supaya klik tembus ke tombol */
 }
 
