@@ -234,3 +234,80 @@ html {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.5rem;
 }
+
+/* UI STATUS (HEALTH & HUNGER) */
+.ui-status-container {
+    position: absolute;
+    bottom: 85px; /* Tepat di atas Hotbar */
+    display: flex;
+    justify-content: space-between;
+    width: 280px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.mc-icon {
+    width: 18px;
+    height: 18px;
+    image-rendering: pixelated;
+    margin-right: -1px;
+}
+
+/* CHAT SYSTEM (POSISI ATAS) */
+#chat-box {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    width: 260px;
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.chat-msg {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    font-size: 0.65rem;
+    color: #FFF;
+    text-shadow: 1px 1px #000;
+    animation: chatIn 0.5s ease-out;
+    max-width: fit-content;
+}
+
+@keyframes chatIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* LOADING SCREEN */
+#loading-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #31211b url('https://www.transparenttextures.com/patterns/dirt.png');
+    z-index: 9998;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loading-container {
+    width: 200px;
+}
+
+#loading-bar-border {
+    height: 15px;
+    border: 2px solid #fff;
+    padding: 2px;
+    background: #000;
+}
+
+#loading-bar {
+    height: 100%;
+    background: #55ff55;
+    width: 0%;
+    transition: width 0.1s linear;
+}

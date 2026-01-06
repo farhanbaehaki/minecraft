@@ -1,83 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Happy Birthday Naura!</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-</head>
-<body>
-
+  </head>
+  <body>
     <div id="start-overlay">
-        <div style="text-align: center;">
-            <h2>[ SERVER ONLINE ]</h2>
-            <p>Click to Start Game</p>
-        </div>
+      <div style="text-align: center">
+        <h2>[ SERVER ONLINE ]</h2>
+        <p>Click to Start Game</p>
+      </div>
     </div>
 
-    <div id="loading-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #31211b url('https://www.transparenttextures.com/patterns/dirt.png'); z-index: 9998; flex-direction: column; justify-content: center; align-items: center; color: white;">
-        <div style="width: 250px; height: 20px; border: 2px solid white; padding: 2px; margin-bottom: 15px;">
-            <div id="loading-bar" style="width: 0%; height: 100%; background: #55FF55;"></div>
+    <div id="loading-screen">
+      <div class="loading-container">
+        <div id="loading-bar-border">
+          <div id="loading-bar"></div>
         </div>
         <h3 id="loading-text">Building Terrain...</h3>
+      </div>
     </div>
 
-    <audio id="bgm" loop><source src="assets/Haggstrom.mp3" type="audio/mpeg"></audio>
-    <audio id="sfx-click"><source src="assets/Click.mp3" type="audio/mpeg"></audio>
-    <audio id="sfx-challenge"><source src="assets/Challenge_complete.ogg" type="audio/ogg"></audio>
+    <audio id="bgm" loop>
+      <source src="assets/Haggstrom.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sfx-click">
+      <source src="assets/Click.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="sfx-challenge">
+      <source src="assets/Challenge_complete.ogg" type="audio/ogg" />
+    </audio>
 
     <div class="minecraft-screen">
-        <div class="logo-container">
-            <h1 class="main-title">OUR<span>CRAFT</span></h1>
-            <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
-        </div>
-        
-        <div class="menu-buttons">
-            <button class="mc-button" onclick="mainEvent()">ENTER NEW AGE (v.19.0)</button>
-            <button class="mc-button" onclick="showGift()">CLAIM BIRTHDAY LOOT</button>
-        </div>
+      <div id="chat-box"></div>
 
-        <div class="hotbar-container">
-            <div class="hotbar-slot" onclick="openLoot('[Stone Age]', 'Ingat saat kamu memulai petualangan baru tahun lalu? Itu adalah awal dari keberanianmu di level 18! 🪨')">
-                <img src="https://minecraft.wiki/images/Stone_Pickaxe_JE3_BE2.png" alt="Pickaxe">
-            </div>
-            <div class="hotbar-slot" onclick="openLoot('[Suit Up]', 'Kamu selalu tampil mempesona. Bahkan armor terkuat pun tidak sebanding dengan senyummu! ✨')">
-                <img src="https://minecraft.wiki/images/Iron_Chestplate_JE2_BE2.png" alt="Armor">
-            </div>
-            <div class="hotbar-slot" onclick="eatCake()">
-                <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake">
-                <span class="tooltip">Klik untuk tiup lilin!</span>
-            </div>
-            <div class="hotbar-slot" onclick="openLoot('[Diamond]', 'Momen paling berharga bagiku adalah setiap detik bersamamu. Kamu adalah diamond-ku. 💎')">
-                <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamond">
-            </div>
-            <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. ❤️')">
-                <img src="https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE1.png" alt="Heart">
-            </div>
+      <div class="ui-status-container">
+        <div class="health-bar">
+          <script>
+            for (let i = 0; i < 10; i++)
+              document.write(
+                '<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart.png" class="mc-icon">'
+              );
+          </script>
         </div>
+        <div class="hunger-bar">
+          <script>
+            for (let i = 0; i < 10; i++)
+              document.write(
+                '<img src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/hunger.png" class="mc-icon">'
+              );
+          </script>
+        </div>
+      </div>
 
-        <div class="version-text">Minecraft Naura Edition v.19.0 (13 Jan 2007)</div>
+      <div class="logo-container">
+        <h1 class="main-title">OUR<span>CRAFT</span></h1>
+        <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
+      </div>
+
+      <div class="menu-buttons">
+        <button class="mc-button" onclick="mainEvent()">
+          ENTER NEW AGE (v.19.0)
+        </button>
+        <button class="mc-button" onclick="showGift()">
+          CLAIM BIRTHDAY LOOT
+        </button>
+      </div>
+
+      <div class="hotbar-container">
+        <div
+          class="hotbar-slot"
+          onclick="openLoot('[Stone Age]', 'Ingat saat kamu memulai petualangan baru tahun lalu? Itu adalah awal dari keberanianmu di level 18! 🪨')"
+        >
+          <img
+            src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/iron_pickaxe.png"
+            alt="Pickaxe"
+          />
+        </div>
+        <div
+          class="hotbar-slot"
+          onclick="openLoot('[Suit Up]', 'Kamu selalu tampil mempesona. Bahkan armor terkuat pun tidak sebanding dengan senyummu! ✨')"
+        >
+          <img
+            src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/iron_chestplate.png"
+            alt="Armor"
+          />
+        </div>
+        <div class="hotbar-slot" onclick="eatCake()">
+          <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake" />
+          <span class="tooltip">Tiup Lilin!</span>
+        </div>
+        <div
+          class="hotbar-slot"
+          onclick="openLoot('[Diamond]', 'Momen paling berharga bagiku adalah setiap detik bersamamu. Kamu adalah diamond-ku. 💎')"
+        >
+          <img
+            src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/diamond.png"
+            alt="Diamond"
+          />
+        </div>
+        <div
+          class="hotbar-slot active-slot"
+          onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. ❤️')"
+        >
+          <img
+            src="https://raw.githubusercontent.com/Anu-Sivaram/Minecraft-UI/main/assets/heart_of_the_sea.png"
+            alt="Heart"
+          />
+        </div>
+      </div>
+
+      <div class="version-text">
+        Minecraft Naura Edition v.19.0 (13 Jan 2007)
+      </div>
     </div>
 
     <div id="loot-modal" class="mc-modal">
-        <div class="mc-modal-content">
-            <h3 id="loot-title" style="color: #FFFF55; margin-top: 0;"></h3>
-            <div id="loot-text"></div>
-            <button class="mc-button" style="margin-top: 15px;" onclick="closeLoot()">CLOSE</button>
-        </div>
+      <div class="mc-modal-content">
+        <h3 id="loot-title" style="color: #ffff55; margin-top: 0"></h3>
+        <div id="loot-text"></div>
+        <button
+          class="mc-button"
+          style="margin-top: 15px"
+          onclick="closeLoot()"
+        >
+          CLOSE
+        </button>
+      </div>
     </div>
 
     <div id="advancement" class="advancement">
-        <div class="adv-iconbox">
-             <img src="https://minecraft.wiki/images/Cake_JE4.png" width="30">
-        </div>
-        <div class="adv-text">
-            <span class="adv-title">Advancement Made!</span>
-            <span class="adv-desc">Level 19: The Birthday Girl!</span>
-        </div>
+      <div class="adv-iconbox">
+        <img src="https://minecraft.wiki/images/Cake_JE4.png" width="30" />
+      </div>
+      <div class="adv-text">
+        <span class="adv-title">Advancement Made!</span>
+        <span class="adv-desc">Level 19: The Birthday Girl!</span>
+      </div>
     </div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
