@@ -1,111 +1,174 @@
-/* Menggunakan font pixel (bisa diganti dengan font Minecraftia jika ada) */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* Mendaftarkan Font Minecraftia (Pastikan file .ttf ada di folder proyek) */
+@font-face {
+    font-family: 'Minecraftia';
+    src: url('Minecraftia.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Jika belum download fontnya, pakai alternatif ini (hapus tanda komentar di bawah): */
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
+
 
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Press Start 2P', cursive;
+    /* Gunakan 'Press Start 2P' jika belum download Minecraftia.ttf */
+    font-family: 'Minecraftia', 'Press Start 2P', cursive; 
     overflow: hidden;
     background-color: #1a1a1a;
+    user-select: none; /* Agar teks tidak bisa diblok */
 }
 
+/* Overlay Start */
+#start-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    cursor: pointer;
+}
+#start-overlay p {
+    animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0.5; } }
+
+
+/* Layar Utama */
 .minecraft-screen {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('https://images.unsplash.com/photo-1627634777217-c864268db30c?auto=format&fit=crop&q=80&w=1000') no-repeat center center fixed;
+    /* GANTI 'assets/bg.jpg' DENGAN GAMBAR KAMU */
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('assets/bg.jpg') no-repeat center center fixed;
     background-size: cover;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    image-rendering: pixelated; /* Agar gambar terlihat tajam ala pixel */
 }
 
-/* Judul Utama */
+/* Logo */
 .logo-container {
     text-align: center;
     position: relative;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
 .main-title {
-    color: #fff;
-    font-size: 3rem;
-    text-shadow: 4px 4px #333;
-    letter-spacing: 5px;
+    color: #AFAFAF;
+    font-size: 4rem;
+    text-shadow: 4px 4px 0px #3F3F3F;
+    margin: 0;
+    letter-spacing: 2px;
 }
 
-.main-title span { color: #55FF55; }
+.main-title span { color: #AFAFAF; }
 
-/* Splash Text Kuning */
+/* Splash Text Kuning yang Bergoyang */
 .splash-text {
     color: #FFFF55;
-    font-size: 1.2rem;
+    font-size: 1rem;
     position: absolute;
-    right: -50px;
-    bottom: -10px;
+    right: -60px;
+    top: 0px;
     transform: rotate(-20deg);
-    animation: splashAnim 0.5s infinite alternate;
-    text-shadow: 2px 2px #333;
+    animation: splashAnim 0.6s infinite alternate ease-in-out;
+    text-shadow: 2px 2px 0px #3F3F3F;
+    width: 300px;
+    text-align: center;
 }
 
 @keyframes splashAnim {
     from { transform: rotate(-20deg) scale(1); }
-    to { transform: rotate(-20deg) scale(1.1); }
+    to { transform: rotate(-20deg) scale(1.05); }
 }
 
-/* Tombol Minecraft */
+/* Tombol Minecraft yang Otentik */
 .menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     width: 400px;
+    max-width: 90%;
 }
 
 .mc-button {
-    background: #AAAAAA;
-    border: 4px solid;
-    border-color: #FFFFFF #555555 #555555 #FFFFFF;
+    /* Warna dasar tombol */
+    background-color: #7e7e7e; 
+    /* Border 3D: Atas/Kiri Terang, Bawah/Kanan Gelap */
+    border-top: 3px solid #dbdbdb;
+    border-left: 3px solid #dbdbdb;
+    border-bottom: 3px solid #5b5b5b;
+    border-right: 3px solid #5b5b5b;
+    
     color: #FFFFFF;
     padding: 15px;
     cursor: pointer;
-    text-shadow: 2px 2px #333;
-    font-family: 'Press Start 2P', cursive;
-    font-size: 0.8rem;
-    transition: 0.1s;
+    text-shadow: 2px 2px 0px #3F3F3F;
+    /* Gunakan 'Press Start 2P' jika belum download Minecraftia.ttf */
+    font-family: 'Minecraftia', 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    text-align: center;
+    position: relative;
 }
 
+/* Efek Hover Tombol */
 .mc-button:hover {
-    background: #55FF55;
-    border-color: #AAFFAA #00AA00 #00AA00 #AAFFAA;
+    background-color: #969696; /* Sedikit lebih terang */
+    border-top: 3px solid #ffffff;
+    border-left: 3px solid #ffffff;
+    border-bottom: 3px solid #747474;
+    border-right: 3px solid #747474;
 }
 
-.disabled { opacity: 0.6; cursor: not-allowed; }
+/* Efek Klik Tombol (Active) */
+.mc-button:active {
+    background-color: #5b5b5b;
+    border-top: 3px solid #5b5b5b;
+    border-left: 3px solid #5b5b5b;
+    border-bottom: 3px solid #dbdbdb;
+    border-right: 3px solid #dbdbdb;
+    color: #cfcfcf;
+}
 
-/* Advancement Toast */
+.disabled { opacity: 0.7; cursor: not-allowed; color: #a0a0a0; }
+.version-text { position: absolute; bottom: 10px; left: 10px; color: white; font-size: 0.7rem; }
+
+
+/* Advancement Toast Pop-up */
 .advancement {
     position: fixed;
-    top: -100px;
+    top: -100px; /* Sembunyi di atas layar */
     right: 20px;
     background: #212121;
-    border: 3px solid #000;
-    padding: 10px;
+    border: 2px solid #ffffff;
+    outline: 2px solid #000000; /* Double border trick */
+    padding: 5px 10px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    transition: 0.5s ease-in-out;
-    width: 320px;
+    gap: 10px;
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Efek mental */
+    width: auto;
     z-index: 100;
+    box-shadow: 4px 4px 0px #000;
 }
 
-.adv-icon { font-size: 2rem; }
-.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; }
-.adv-desc { color: #FFFFFF; font-size: 0.8rem; }
+.adv-iconbox {
+    width: 40px; height: 40px;
+    background: #5b5b5b;
+    border: 2px solid #dbdbdb;
+    display: flex; align-items: center; justify-content: center;
+}
+.adv-iconbox img { width: 32px; image-rendering: pixelated; }
 
+.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; margin-bottom: 4px; }
+.adv-desc { color: #FFFFFF; font-size: 0.8rem; white-space: nowrap; }
+
+/* Class untuk memunculkan advancement */
 .show-adv { top: 20px !important; }
-
-/* Status Bar */
-.status-bar {
-    position: absolute;
-    bottom: 20px;
-}

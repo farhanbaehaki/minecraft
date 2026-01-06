@@ -3,39 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! - Level Up</title>
+    <title>Happy Birthday! - Server Online</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
+    <div id="start-overlay">
+        <p>Click anywhere to Start Game</p>
+    </div>
+
+    <audio id="bgm" loop>
+        <source src="assets/Haggstrom.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx-click">
+        <source src="assets/Click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="sfx-levelup">
+        <source src="assets/Challenge_complete.ogg" type="audio/mpeg">
+    </audio>
+
+
     <div class="minecraft-screen">
         <div class="logo-container">
-            <h1 class="main-title">OUR<span>WORLD</span></h1>
+            <h1 class="main-title">OUR<span>CRAFT</span></h1>
             <div class="splash-text" id="splash">Happy Birthday, Sayang!</div>
         </div>
 
         <div class="menu-buttons">
-            <button class="mc-button" onclick="triggerAdvancement()">
-                PLAY WORLD (LEVEL UP!)
+            <button class="mc-button main-btn" onclick="mainEvent()">
+                ENTER NEW AGE (LEVEL UP!)
             </button>
+            
             <button class="mc-button" onclick="showGift()">
                 OPEN BIRTHDAY CHEST
             </button>
+            
             <button class="mc-button disabled">
                 HARDCORE MODE: FOREVER TOGETHER
             </button>
         </div>
 
-        <div class="status-bar">
-            <div class="hearts" id="hp-bar">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
-        </div>
+        <div class="version-text">Minecraft [Nama Pacar] Edition v.24.0</div>
     </div>
 
     <div id="advancement" class="advancement">
-        <div class="adv-icon">🏆</div>
+        <div class="adv-iconbox">
+             <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/31/Cake_JE3_BE2.png" alt="Cake">
+        </div>
         <div class="adv-text">
-            <span class="adv-title">Advancement Made!</span>
-            <span class="adv-desc">Level 24: The Best Girlfriend</span>
+            <span lass="adv-title">Advancement Made!</span>
+            <span class="adv-desc" id="adv-desc-text">The Birthday Girl!</span>
         </div>
     </div>
 
