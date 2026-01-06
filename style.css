@@ -1,16 +1,25 @@
+/* --- GLOBAL RESET & FONT --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-* { box-sizing: border-box; cursor: url('https://cur.cursors-4u.net/games/gam-4/gam388.cur'), auto !important; }
+* {
+    box-sizing: border-box;
+    cursor: url('https://cur.cursors-4u.net/games/gam-4/gam388.cur'), auto !important;
+}
 
 body {
-    margin: 0; padding: 0; height: 100vh; width: 100%; overflow: hidden;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
     font-family: 'Press Start 2P', cursive;
     background: url('assets/background.jfif') no-repeat center center fixed;
     background-size: cover;
-    display: flex; justify-content: center; align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Transisi Layar Hitam */
+/* --- SYSTEM UI --- */
 #world-transition {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: black; z-index: 9000; opacity: 0; pointer-events: none;
@@ -20,95 +29,84 @@ body {
 .container {
     position: fixed; width: 100%; height: 100vh;
     display: flex; justify-content: center; align-items: center;
-    z-index: 10; transition: opacity 0.5s;
+    z-index: 10;
 }
 
 .hidden { display: none !important; }
 
-/* Boss HUD */
-.quest-card {
-    width: 350px; background: rgba(0,0,0,0.7);
-    border: 4px solid #ffffff; padding: 20px; text-align: center;
+/* --- MOJANG LOADING --- */
+#loading-screen {
+    position: fixed; width: 100%; height: 100%; background: #ef323d;
+    z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
+    transition: opacity 0.8s ease;
 }
-
-.boss-hud { width: 100%; margin-bottom: 20px; }
-.boss-name { color: #ff55ff; font-size: 10px; margin-bottom: 8px; text-shadow: 2px 2px #333; }
-.hp-bar-container { width: 100%; height: 15px; background: #333; border: 2px solid #fff; }
-.hp-fill { width: 20%; height: 100%; background: #ff5555; transition: width 0.5s ease; }
-
-/* Character */
-.floating-pixel {
-    width: 80px; margin: 20px 0;
-    animation: float 2s infinite ease-in-out;
+.mojang-logo {
+    width: 200px; height: 50px;
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Mojang_Studios_logo.svg/1024px-Mojang_Studios_logo.svg.png') no-repeat center;
+    background-size: contain;
 }
-@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-/* Dialog & Buttons */
-.hd-dialog { background: #c6c6c6; border: 3px solid #000; padding: 15px; text-align: left; }
-#mc-text { font-size: 9px; color: #333; line-height: 1.5; min-height: 45px; }
-
-.action-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 15px; }
-
-.mc-button, .mc-button-small {
-    font-family: 'Press Start 2P'; background: #aaaaaa;
-    border: 3px solid #373737; border-top-color: #fff; border-left-color: #fff;
-    padding: 10px; font-size: 9px; color: #333;
-}
-
-.mc-button:hover { background: #55FF55; }
-
-/* Achievement & Loading sama seperti sebelumnya */
-#loading-screen { position: fixed; width: 100%; height: 100%; background: #ef323d; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.8s; }
-.mojang-logo { width: 200px; height: 50px; background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Mojang_Studios_logo.svg/1024px-Mojang_Studios_logo.svg.png') no-repeat center; background-size: contain; }
-.loading-bar-container { width: 180px; height: 4px; background: rgba(255,255,255,0.3); margin-top: 20px; }
+.loading-bar-container { width: 150px; height: 4px; background: rgba(255,255,255,0.3); margin-top: 30px; }
 .loading-bar { width: 0%; height: 100%; background: #fff; animation: load 2s forwards; }
 @keyframes load { to { width: 100%; } }
 
-.achievement-toast { position: fixed; top: 20px; right: 20px; background: #212121; border: 3px solid #000; padding: 10px; display: flex; align-items: center; z-index: 9500; transition: 0.5s; }
-.hidden-toast { transform: translateX(200%); }
-.achievement-icon img { width: 30px; }
-.yellow-text { color: #ffff55; font-size: 8px; }
+/* --- CARDS & GUI --- */
+.mc-card, .reward-card {
+    background: rgba(198, 198, 198, 0.95);
+    border: 4px solid #ffffff;
+    border-top-color: #ffffff; border-left-color: #ffffff;
+    border-right-color: #555; border-bottom-color: #555;
+    padding: 30px; text-align: center; max-width: 90%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.mc-font-title { color: #3f3f3f; font-size: 16px; margin-bottom: 20px; }
+.mc-font-small { color: #555; font-size: 9px; line-height: 1.5; }
+.mc-font-white { color: white; text-shadow: 2px 2px #000; font-size: 12px; }
+
+/* --- INPUTS & BUTTONS --- */
+.mc-input {
+    font-family: 'Press Start 2P'; padding: 12px; border: 3px solid #333;
+    width: 200px; font-size: 12px; margin: 15px 0; outline: none;
+}
+.mc-button, .mc-button-small {
+    font-family: 'Press Start 2P'; background: #aaa;
+    border: 3px solid #333; border-top-color: #fff; border-left-color: #fff;
+    padding: 12px 20px; font-size: 10px; cursor: pointer;
+}
+.mc-button:hover { background: #55FF55; }
+.mc-button:active { border: 3px solid #fff; border-top-color: #333; border-left-color: #333; }
+
+/* --- GAMEPLAY: SHULKER --- */
+.game-scene { text-align: center; }
+#shulker-container { cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.shulker-pixel {
+    width: 150px; image-rendering: pixelated;
+    filter: drop-shadow(0 15px 10px rgba(0,0,0,0.5));
+    transition: transform 0.1s;
+}
+#hit-counter { font-size: 30px; color: #ff55ff; margin-top: 20px; text-shadow: 4px 4px #000; }
+
+.shake-hit { animation: shake 0.2s ease-in-out; }
+@keyframes shake {
+    0%, 100% { transform: translate(0,0) rotate(0); }
+    25% { transform: translate(8px, -8px) rotate(5deg); }
+    75% { transform: translate(-8px, 8px) rotate(-5deg); }
+}
+
+/* --- REWARD --- */
+.reward-icon { width: 80px; margin-bottom: 20px; animation: float 2s infinite ease-in-out; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+/* --- ACHIEVEMENT --- */
+.achievement-toast {
+    position: fixed; top: 20px; right: 20px; background: #212121;
+    border: 3px solid #000; padding: 10px; display: flex; align-items: center;
+    z-index: 9500; transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.hidden-toast { transform: translateX(250%); }
+.achievement-icon img { width: 30px; image-rendering: pixelated; }
+.yellow-text { color: #ffff55; font-size: 8px; display: block; }
 .white-text { color: #fff; font-size: 9px; }
 
-.error { color: #ff5555; font-size: 8px; }
-
-@media (max-width: 600px) { .quest-card { width: 90%; } }
-
-.unboxing-scene {
-    text-align: center;
-    z-index: 100;
-}
-
-.shulker-pixel {
-    width: 150px;
-    height: auto;
-    image-rendering: pixelated;
-    transition: transform 0.1s ease;
-    filter: drop-shadow(0 15px 15px rgba(0,0,0,0.4));
-}
-
-#hit-counter {
-    font-size: 20px;
-    margin-top: 20px;
-    color: #ff55ff;
-    text-shadow: 3px 3px #000;
-}
-
-/* Animasi saat kotak dipukul */
-.shake-hit {
-    animation: shake 0.2s ease-in-out;
-}
-
-.reward-item {
-    width: 80px;
-    animation: rotate3d 3s infinite linear;
-}
-
-@keyframes rotate3d {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
-}
-
-#reward-display {
-    animation: popup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+.error-text { color: #aa0000; font-size: 8px; margin-top: 10px; }
+.music-controls { position: fixed; bottom: 20px; right: 20px; }

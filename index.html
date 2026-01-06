@@ -20,11 +20,48 @@
 
     <div id="achievement" class="achievement-toast hidden-toast">
         <div class="achievement-icon">
-            <img src="https://raw.githubusercontent.com/papi-dev/minecraft-assets/main/assets/diamond.png" alt="Diamond">
+            <img src="https://minecraft.wiki/images/Diamond_Render.png" alt="Diamond">
         </div>
         <div class="achievement-text">
             <span class="yellow-text">Achievement Get!</span>
-            <span class="white-text">Unlocked Naura's Heart</span>
+            <span class="white-text">The Hidden Heart</span>
+        </div>
+    </div>
+
+    <div id="login-page" class="container">
+        <div class="mc-card">
+            <h1 class="mc-font-title">Secure World</h1>
+            <p class="mc-font-small">Enter secret key to spawn:</p>
+            <div class="input-group">
+                <input type="password" id="passwordInput" class="mc-input" placeholder="...">
+                <button onclick="checkPassword()" class="mc-button">SPAWN</button>
+            </div>
+            <p id="errorMessage" class="error-text"></p>
+        </div>
+    </div>
+
+    <div id="main-content" class="container hidden">
+        <div class="game-scene">
+            <h2 id="instruction" class="mc-font-white">Ketuk Shulker 10x!</h2>
+            
+            <div id="shulker-container" onclick="hitShulker()">
+                <img src="https://minecraft.wiki/images/Purple_Shulker_Box_Render.png" id="shulker-box" class="shulker-pixel">
+                <div id="hit-counter">10</div>
+            </div>
+
+            <div id="reward-display" class="hidden">
+                <div class="reward-card">
+                    <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_Render.png" class="reward-icon">
+                    <h2 class="mc-font-title" style="color: #ffff55;">QUEST CLEAR!</h2>
+                    <p class="mc-font-small">Selamat Naura! Kamu menemukan Diamond Heart milik Farhan.</p>
+                    <p class="mc-font-small" style="color: #55FF55; margin-top: 10px;">[Hadiah: Voucher Makan Bareng]</p>
+                    <button onclick="location.reload()" class="mc-button-small" style="margin-top: 20px;">Main Lagi</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="music-controls">
+            <button id="musicBtn" onclick="toggleMusic()" class="mc-button-small">Music: OFF</button>
         </div>
     </div>
 
@@ -32,38 +69,6 @@
     <audio id="sound-pop" src="https://www.myinstants.com/media/sounds/minecraft_pop.mp3"></audio>
     <audio id="sound-levelup" src="https://www.myinstants.com/media/sounds/level-up-minecraft.mp3"></audio>
     <audio id="bgm" loop src="https://www.soundboard.com/handler/Downloadaudio.ashx?id=439366"></audio>
-
-    <div id="login-page" class="container">
-        <div class="hd-card">
-            <h1 class="mc-font">Secure World</h1>
-            <p class="mc-font-small">Enter secret key to spawn:</p>
-            <div class="input-group">
-                <input type="password" id="passwordInput" class="mc-input" placeholder="...">
-                <button onclick="checkPassword()" class="mc-button">SPAWN</button>
-            </div>
-            <p id="errorMessage" class="error"></p>
-        </div>
-    </div>
-
-<div id="main-content" class="container hidden">
-    <div class="unboxing-scene">
-        <h2 class="mc-font-white" id="instruction">Ketuk Shulker untuk Membuka!</h2>
-        
-        <div id="shulker-container" onclick="hitShulker()">
-            <img src="https://minecraft.wiki/images/Shulker_Box_Render.png" id="shulker-box" class="shulker-pixel">
-            <div id="hit-counter" class="mc-font-white">10</div>
-        </div>
-
-        <div id="reward-display" class="hidden">
-            <div class="hd-card">
-                <img src="https://minecraft.wiki/images/Diamond_Render.png" class="reward-item">
-                <p class="mc-font">Misi Selesai!</p>
-                <p class="mc-font-small">Kamu mendapatkan Diamond Heart. Screenshot untuk klaim janji jalan bareng!</p>
-                <button onclick="location.reload()" class="mc-button-small">Main Lagi?</button>
-            </div>
-        </div>
-    </div>
-</div>
 
     <script src="script.js"></script>
 </body>

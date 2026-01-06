@@ -1,83 +1,37 @@
-let currentHP = 20;
+/* --- CONFIGURATION --- */
+let hitCount = 10;
 let isPlaying = false;
 const bgm = document.getElementById('bgm');
 
-// Sound Function
-function playSound(id) {
-    const s = document.getElementById(id);
-    if(s) { s.currentTime = 0; s.play().catch(()=>{}); }
-}
-
-// Password & World Transition
+/* --- 1. LOGIN & TRANSITION --- */
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
+    const errorMsg = document.getElementById('errorMessage');
     const trans = document.getElementById('world-transition');
     
-    if(input.toLowerCase() === "bubsieee") {
+    // Gunakan password "bubsieee"
+    if (input.toLowerCase() === "bubsieee") {
         playSound('sound-levelup');
-        trans.style.opacity = '1';
+        trans.style.opacity = '1'; // Fade ke hitam
         
         setTimeout(() => {
             document.getElementById('login-page').classList.add('hidden');
             document.getElementById('main-content').classList.remove('hidden');
+            
             setTimeout(() => {
-                trans.style.opacity = '0';
-                triggerAchievement();
+                trans.style.opacity = '0'; // Kembali dari hitam
             }, 600);
         }, 500);
     } else {
         playSound('sound-click');
-        document.getElementById('errorMessage').innerText = "Wrong Key!";
+        errorMsg.innerText = "ACCESS DENIED!";
+        // Efek shake pada card login
+        document.querySelector('.mc-card').classList.add('shake-hit');
+        setTimeout(() => document.querySelector('.mc-card').classList.remove('shake-hit'), 200);
     }
 }
 
-// Quest Interaction
-function interact(type) {
-    const hpFill = document.getElementById('hp-fill');
-    const text = document.getElementById('mc-text');
-    playSound('sound-pop');
-
-    if (type === 'healing') {
-        currentHP += 25;
-        text.innerText = "> [HEAL]: Kamu memakan Golden Apple. Mood Naura naik pesat!";
-    } else if (type === 'talk') {
-        currentHP += 15;
-        text.innerText = "> [CHAT]: Farhan bilang dia sayang kamu. Hatimu menghangat.";
-    } else if (type === 'gift') {
-        if (currentHP >= 100) {
-            text.innerText = "> [REWARD]: DIAMOND UNLOCKED! Cek tas kamu di dunia nyata (atau traktir makan!)";
-            playSound('sound-levelup');
-        } else {
-            text.innerText = "> [LOCKED]: Mood belum 100%! Lakukan lebih banyak interaksi.";
-        }
-    }
-
-    if (currentHP > 100) currentHP = 100;
-    hpFill.style.width = currentHP + "%";
-}
-
-// Utils
-function toggleMusic() {
-    if (!isPlaying) { bgm.play(); document.getElementById('musicBtn').innerText = "Music: ON"; }
-    else { bgm.pause(); document.getElementById('musicBtn').innerText = "Music: OFF"; }
-    isPlaying = !isPlaying;
-}
-
-function triggerAchievement() {
-    const t = document.getElementById('achievement');
-    t.classList.remove('hidden-toast');
-    setTimeout(() => t.classList.add('hidden-toast'), 5000);
-}
-
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        document.getElementById('loading-screen').style.opacity = '0';
-        setTimeout(() => document.getElementById('loading-screen').style.display = 'none', 800);
-    }, 2500);
-});
-
-let hitCount = 10;
-
+/* --- 2. SHULKER MECHANIC --- */
 function hitShulker() {
     if (hitCount <= 0) return;
 
@@ -86,23 +40,72 @@ function hitShulker() {
     const reward = document.getElementById('reward-display');
     const instruction = document.getElementById('instruction');
 
-    // Suara saat dipukul
     playSound('sound-pop');
     
-    // Efek guncang
+    // Animasi Guncang
     box.classList.add('shake-hit');
     setTimeout(() => box.classList.remove('shake-hit'), 200);
 
     hitCount--;
     counter.innerText = hitCount;
 
-    // Saat hitungan habis
     if (hitCount === 0) {
         playSound('sound-levelup');
-        box.style.display = 'none';
-        counter.style.display = 'none';
+        // Sembunyikan elemen Shulker
+        document.getElementById('shulker-container').style.display = 'none';
         instruction.style.display = 'none';
+        
+        // Tampilkan Hadiah
         reward.classList.remove('hidden');
         triggerAchievement();
     }
 }
+
+/* --- 3. UTILITIES --- */
+function playSound(id) {
+    const sound = document.getElementById(id);
+    if (sound) {
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+    }
+}
+
+function toggleMusic() {
+    const btn = document.getElementById('musicBtn');
+    if (!isPlaying) {
+        bgm.volume = 0.4;
+        bgm.play();
+        btn.innerText = "Music: ON";
+    } else {
+        bgm.pause();
+        btn.innerText = "Music: OFF";
+    }
+    isPlaying = !isPlaying;
+    playSound('sound-click');
+}
+
+function triggerAchievement() {
+    const toast = document.getElementById('achievement');
+    toast.classList.remove('hidden-toast');
+    setTimeout(() => {
+        toast.classList.add('hidden-toast');
+    }, 5000);
+}
+
+/* --- 4. INITIAL LOAD --- */
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loading-screen');
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.style.display = 'none';
+        }, 800);
+    }, 2500);
+});
+
+// Shortcut Enter Key untuk Login
+document.getElementById('passwordInput').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        checkPassword();
+    }
+});
