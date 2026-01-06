@@ -23,6 +23,7 @@ startOverlay.addEventListener("click", () => {
   setTimeout(() => {
     startOverlay.style.display = "none";
     mainScreen.classList.add("show-content");
+    setTimeout(() => (mainScreen.style.opacity = "1"), 50);
   }, 500);
 
   bgm.volume = 0.3;
