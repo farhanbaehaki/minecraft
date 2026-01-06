@@ -50,3 +50,28 @@ setInterval(() => {
     const splash = document.getElementById('splash');
     splash.innerText = quotes[Math.floor(Math.random() * quotes.length)];
 }, 3000);
+
+function openLoot(title, message) {
+    sfxClick.play();
+    document.getElementById('loot-title').innerText = title;
+    document.getElementById('loot-text').innerText = message;
+    document.getElementById('loot-modal').style.display = 'flex';
+}
+
+function closeLoot() {
+    sfxClick.play();
+    document.getElementById('loot-modal').style.display = 'none';
+    
+    // Advancement khusus saat dia baca semua pesan!
+    showAdvancement("Loot Found!", "Advancement Made: Falling in Love!");
+}
+
+function showAdvancement(title, desc) {
+    const adv = document.getElementById('advancement');
+    document.querySelector('.adv-title').innerText = title;
+    document.getElementById('adv-desc-text').innerText = desc;
+    
+    sfxChallenge.play();
+    adv.classList.add('show-adv');
+    setTimeout(() => adv.classList.remove('show-adv'), 7000);
+}

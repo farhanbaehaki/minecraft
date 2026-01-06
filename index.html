@@ -39,6 +39,32 @@
         </div>
 
         <div class="version-text">Minecraft Naura Edition v.19.0 (13 Jan 2007)</div>
+
+<div class="hotbar-container">
+    <div class="hotbar-slot" onclick="openLoot('Diamond', 'Naura, kamu adalah diamond paling berharga di hidupku! 💎')">
+        <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamond">
+    </div>
+    <div class="hotbar-slot" onclick="openLoot('Steak', 'Terima kasih sudah selalu menjagaku dan jadi penyemangatku! 🍖')">
+        <img src="https://minecraft.wiki/images/Cooked_Steak_JE4_BE3.png" alt="Steak">
+    </div>
+    <div class="hotbar-slot" onclick="openLoot('Compass', 'Ke mana pun aku pergi, kamu adalah arah pulangku. 🧭')">
+        <img src="https://minecraft.wiki/images/Compass_JE3_BE3.gif" alt="Compass">
+    </div>
+    <div class="hotbar-slot"></div>
+    <div class="hotbar-slot"></div>
+    <div class="hotbar-slot"></div>
+    <div class="hotbar-slot"></div>
+    <div class="hotbar-slot"></div>
+    <div class="hotbar-slot active-slot"></div> </div>
+
+<div id="loot-modal" class="mc-modal">
+    <div class="mc-modal-content">
+        <h3 id="loot-title" style="color: #FFFF55;">Item Found!</h3>
+        <p id="loot-text"></p>
+        <button class="mc-button" onclick="closeLoot()">CLOSE</button>
+    </div>
+</div>
+
     </div>
 
     <div id="advancement" class="advancement">
