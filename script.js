@@ -19,12 +19,8 @@ function playSfx(audio) {
 
 // 3. LOGIKA START GAME
 startOverlay.addEventListener("click", () => {
- const video = document.getElementById("bg-video");
-  if (video) video.play();
-
   startOverlay.style.opacity = "0";
   setTimeout(() => {
-
     startOverlay.style.display = "none";
     mainScreen.classList.add("show-content");
   }, 500);
@@ -37,7 +33,7 @@ startOverlay.addEventListener("click", () => {
 // 4. SISTEM LOOT & HOTBAR (Dengan Efek Zoom-Blur)
 function openLoot(title, text, element) {
   playSfx(sfxClick);
-
+  
   // Efek Zoom pada background (Fitur Upgrade)
   mainScreen.classList.add("world-blur");
 
@@ -73,9 +69,7 @@ function mainEvent() {
 // 6. QUEST: TIUP LILIN
 function eatCake(element) {
   playSfx(sfxClick);
-  document
-    .querySelectorAll(".hotbar-slot")
-    .forEach((s) => s.classList.remove("active-slot"));
+  document.querySelectorAll(".hotbar-slot").forEach((s) => s.classList.remove("active-slot"));
   element.classList.add("active-slot");
 
   confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 } });
@@ -108,20 +102,13 @@ function showGift() {
 }
 
 // 8. SPLASH TEXT DINAMIS (Ganti otomatis tiap 5 detik)
-const splashQuotes = [
-  "Level 19!",
-  "HBD Naura!",
-  "Legendary Player",
-  "Diamond Girl",
-  "OP Player!",
-];
+const splashQuotes = ["Level 19!", "HBD Naura!", "Legendary Player", "Diamond Girl", "OP Player!"];
 setInterval(() => {
   const splash = document.getElementById("splash");
   if (splash) {
     splash.style.opacity = 0;
     setTimeout(() => {
-      splash.innerText =
-        splashQuotes[Math.floor(Math.random() * splashQuotes.length)];
+      splash.innerText = splashQuotes[Math.floor(Math.random() * splashQuotes.length)];
       splash.style.opacity = 1;
     }, 500);
   }
@@ -132,16 +119,14 @@ let clicks = 0;
 function easterEgg() {
   clicks++;
   if (clicks === 5) {
-    alert(
-      "✨ SECRET UNLOCKED: You are the most beautiful person in this server!"
-    );
+    alert("✨ SECRET UNLOCKED: You are the most beautiful person in this server!");
     clicks = 0;
   }
 }
 
 function finalCinematic() {
-  playSfx(sfxClick);
-  mainScreen.innerHTML = `
+    playSfx(sfxClick);
+    mainScreen.innerHTML = `
         <div class="ending-credits" style="text-align: center; color: white; padding-top: 50vh;">
             <p class="poem-text">I see the player you mean.</p>
             <p class="poem-text">Naura...</p>
