@@ -1,21 +1,28 @@
+/* 1. FONT SETUP */
 @font-face {
     font-family: 'Minecraftia';
     src: url('Minecraftia.ttf') format('truetype');
 }
 
+/* 2. DASAR HALAMAN */
 body, html {
-    margin: 0; padding: 0; height: 100%;
-    font-family: 'Minecraftia', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Minecraftia', 'Press Start 2P', cursive;
     overflow: hidden;
     background-color: #1a1a1a;
     user-select: none;
 }
 
-/* Overlay Start */
+/* 3. LAYAR PEMBUKA (START OVERLAY) */
 #start-overlay {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
     color: #FFFF55;
     display: flex;
     justify-content: center;
@@ -24,19 +31,27 @@ body, html {
     cursor: pointer;
 }
 
-#start-overlay p { animation: blink 1s infinite; font-size: 1.2rem; }
-@keyframes blink { 50% { opacity: 0.5; } }
+#start-overlay p {
+    animation: blink 1s infinite;
+}
 
-/* Main Screen */
+@keyframes blink {
+    50% { opacity: 0.5; }
+}
+
+/* 4. LAYAR UTAMA (MINECRAFT MENU) */
 .minecraft-screen {
-    display: none; /* Disembunyikan sampai klik pertama */
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                      url('assets/background.jpg');
+    display: none; /* Muncul setelah klik overlay */
+    height: 100vh;
+    width: 100%;
+    /* SETTING GAMBAR POTRET */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                      url('assets/background-potret.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
-    width: 100%;
+    background-attachment: scroll;
+    
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -44,45 +59,118 @@ body, html {
     transition: opacity 0.8s ease;
 }
 
-/* Class untuk memunculkan layar lewat JS */
-.show-content { display: flex !important; opacity: 1 !important; }
-
-.logo-container { text-align: center; position: relative; margin-bottom: 60px; }
-.main-title { color: #AFAFAF; font-size: clamp(2rem, 10vw, 4rem); text-shadow: 4px 4px 0px #3F3F3F; margin: 0; }
-.main-title span { color: #55FF55; }
-
-.splash-text {
-    color: #FFFF55; font-size: 1rem; position: absolute;
-    right: -60px; top: 0px; transform: rotate(-20deg);
-    animation: splashAnim 0.6s infinite alternate ease-in-out;
-    text-shadow: 2px 2px 0px #3F3F3F; width: 300px;
+/* Class pembantu untuk JavaScript */
+.show-content {
+    display: flex !important;
+    opacity: 1 !important;
 }
 
-@keyframes splashAnim { from { transform: rotate(-20deg) scale(1); } to { transform: rotate(-20deg) scale(1.05); } }
+/* 5. LOGO & SPLASH TEXT */
+.logo-container {
+    text-align: center;
+    position: relative;
+    margin-bottom: 50px;
+}
 
-.menu-buttons { display: flex; flex-direction: column; gap: 12px; width: 400px; max-width: 90%; }
+.main-title {
+    color: #AFAFAF;
+    font-size: clamp(2rem, 8vw, 4rem);
+    text-shadow: 4px 4px 0px #3F3F3F;
+    margin: 0;
+}
+
+.main-title span {
+    color: #55FF55;
+}
+
+.splash-text {
+    color: #FFFF55;
+    font-size: 0.9rem;
+    position: absolute;
+    right: -40px;
+    top: -10px;
+    transform: rotate(-20deg);
+    animation: splashAnim 0.6s infinite alternate;
+    text-shadow: 2px 2px #333;
+    width: 250px;
+}
+
+@keyframes splashAnim {
+    from { transform: rotate(-20deg) scale(1); }
+    to { transform: rotate(-20deg) scale(1.05); }
+}
+
+/* 6. TOMBOL MENU */
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 380px;
+    max-width: 85%;
+}
 
 .mc-button {
     background-color: #7e7e7e;
-    border-top: 3px solid #dbdbdb; border-left: 3px solid #dbdbdb;
-    border-bottom: 3px solid #5b5b5b; border-right: 3px solid #5b5b5b;
-    color: #FFFFFF; padding: 15px; cursor: pointer;
-    text-shadow: 2px 2px 0px #3F3F3F; font-family: inherit; font-size: 0.9rem;
+    border: 3px solid;
+    border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
+    color: #FFFFFF;
+    padding: 14px;
+    cursor: pointer;
+    text-shadow: 2px 2px #333;
+    font-family: inherit;
+    font-size: 0.8rem;
+    text-align: center;
 }
 
-.mc-button:hover { background-color: #969696; border-color: #ffffff #747474 #747474 #ffffff; }
-.mc-button:active { background-color: #5b5b5b; border-color: #5b5b5b #5b5b5b #dbdbdb #dbdbdb; }
+.mc-button:hover {
+    background-color: #969696;
+    border-color: #ffffff #747474 #747474 #ffffff;
+}
 
-.disabled { opacity: 0.6; cursor: not-allowed; }
-.version-text { position: absolute; bottom: 10px; left: 10px; color: white; font-size: 0.7rem; }
+.mc-button:active {
+    background-color: #5b5b5b;
+    border-color: #5b5b5b #5b5b5b #dbdbdb #dbdbdb;
+}
 
-/* Advancement Pop-up */
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* 7. VERSI & ADVANCEMENT */
+.version-text {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: white;
+    font-size: 0.6rem;
+}
+
 .advancement {
-    position: fixed; top: -100px; right: 20px;
-    background: #212121; border: 2px solid #ffffff;
-    padding: 8px 12px; display: flex; align-items: center; gap: 10px;
-    transition: top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28); z-index: 1000;
+    position: fixed;
+    top: -100px;
+    right: 20px;
+    background: #212121;
+    border: 2px solid #ffffff;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: top 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    z-index: 1000;
 }
-.show-adv { top: 20px !important; }
-.adv-title { color: #FFFF55; display: block; font-size: 0.7rem; }
-.adv-desc { color: #FFFFFF; font-size: 0.8rem; }
+
+.show-adv {
+    top: 20px !important;
+}
+
+.adv-title {
+    color: #FFFF55;
+    font-size: 0.6rem;
+    display: block;
+}
+
+.adv-desc {
+    color: #FFFFFF;
+    font-size: 0.75rem;
+}
