@@ -14,6 +14,7 @@ body, html {
     overflow: hidden;
     background-color: #1a1a1a;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Hilangkan highlight biru di HP */
 }
 
 /* 3. LAYAR PEMBUKA */
@@ -28,22 +29,20 @@ body, html {
     align-items: center;
     z-index: 9999;
     cursor: pointer;
+    text-align: center;
+    transition: opacity 0.5s ease;
 }
 
-/* 4. LAYAR UTAMA & BACKGROUND FIX */
+/* 4. LAYAR UTAMA & BACKGROUND (FIT UNTUK HP) */
 .minecraft-screen {
     display: none;
     height: 100vh;
     width: 100vw;
-    /* Efek gelap tipis di atas gambar */
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
                       url('assets/background1.jfif');
-    
-    /* Perbaikan agar background Full di HP tanpa terpotong berantakan */
     background-size: cover; 
-    background-position: center bottom; /* Fokus ke area bawah gambar yang biasanya lebih berwarna */
+    background-position: center center;
     background-repeat: no-repeat;
-    
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -57,28 +56,30 @@ body, html {
 .logo-container {
     text-align: center;
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
     z-index: 2;
 }
 
 .main-title {
     color: #AFAFAF;
-    font-size: clamp(2rem, 8vw, 4rem);
+    font-size: clamp(1.8rem, 10vw, 4rem);
     text-shadow: 4px 4px 0px #3F3F3F;
     margin: 0;
+    letter-spacing: 2px;
 }
 
 .main-title span { color: #55FF55; }
 
 .splash-text {
     color: #FFFF55;
-    font-size: 0.8rem;
+    font-size: clamp(0.6rem, 3vw, 0.9rem);
     position: absolute;
-    right: -30px;
-    top: -10px;
+    right: -20px;
+    top: -15px;
     transform: rotate(-20deg);
     animation: splashAnim 0.6s infinite alternate;
     text-shadow: 2px 2px #333;
+    white-space: nowrap;
 }
 
 @keyframes splashAnim {
@@ -90,8 +91,8 @@ body, html {
 .menu-buttons {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    width: 320px;
+    gap: 15px;
+    width: 280px;
     max-width: 85%;
     z-index: 2;
 }
@@ -101,36 +102,40 @@ body, html {
     border: 3px solid;
     border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
     color: white;
-    padding: 14px;
+    padding: 15px 10px;
     cursor: pointer;
     font-family: inherit;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     text-align: center;
     text-shadow: 2px 2px #333;
+    transition: all 0.1s;
 }
 
 .mc-button:active {
+    transform: scale(0.95);
     background-color: #5b5b5b;
-    border-color: #5b5b5b #5b5b5b #dbdbdb #dbdbdb;
+    border-color: #5b5b5b #dbdbdb #dbdbdb #5b5b5b;
 }
 
 .disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* 7. HOTBAR (SISTEM KOTAK BERJEJER) */
+/* 7. HOTBAR (NAVIGASI QUEST) */
 .hotbar-container {
     position: absolute;
-    bottom: 35px;
+    bottom: 30px;
     display: flex;
     gap: 4px;
     padding: 4px;
     background: rgba(0,0,0,0.6);
     border: 4px solid #373737;
     z-index: 10;
+    max-width: 95vw;
+    overflow-x: auto; /* Agar tidak pecah di layar sangat kecil */
 }
 
 .hotbar-slot {
-    width: 44px;
-    height: 44px;
+    min-width: 42px;
+    height: 42px;
     background: #8B8B8B;
     border: 2px solid;
     border-color: #373737 #FFF #FFF #373737;
@@ -141,17 +146,17 @@ body, html {
 }
 
 .hotbar-slot img {
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     image-rendering: pixelated;
 }
 
 .active-slot {
-    outline: 4px solid white;
+    outline: 3px solid white;
     outline-offset: -2px;
 }
 
-/* 8. MODAL LOOT */
+/* 8. MODAL LOOT (TEMPAT PESAN QUEST) */
 .mc-modal {
     display: none;
     position: fixed;
@@ -169,35 +174,43 @@ body, html {
     border-color: #FFF #5B5B5B #5B5B5B #FFF;
     padding: 25px;
     text-align: center;
-    width: 80%;
-    max-width: 400px;
+    width: 85%;
+    max-width: 350px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.4);
 }
 
-/* 9. ADVANCEMENT (FIXED POSITION) */
+#loot-text {
+    white-space: pre-line; /* Support enter/baris baru dari JS */
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+/* 9. ADVANCEMENT POP-UP */
 .advancement {
     position: fixed;
-    top: -150px; /* Tersembunyi jauh di atas */
-    right: 20px;
+    top: -150px;
+    right: 15px;
     background: #212121;
     border: 3px solid #ffffff;
-    padding: 10px 15px;
+    padding: 8px 12px;
     display: flex;
     align-items: center;
-    gap: 12px;
-    transition: top 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    gap: 10px;
+    transition: top 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     z-index: 10000;
-    box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
 }
 
-.show-adv {
-    top: 25px !important; /* Posisi muncul sempurna */
-}
+.show-adv { top: 20px !important; }
+
+.adv-title { color: #FFAA00; font-size: 0.7rem; display: block; }
+.adv-desc { color: #FFFFFF; font-size: 0.65rem; }
 
 .version-text {
     position: absolute;
     bottom: 5px;
     left: 8px;
-    color: white;
-    font-size: 0.55rem;
-    text-shadow: 1px 1px #000;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.5rem;
 }

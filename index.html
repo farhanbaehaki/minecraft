@@ -26,39 +26,38 @@
             <h1 class="main-title">OUR<span>CRAFT</span></h1>
             <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
         </div>
-
+        
         <div class="menu-buttons">
-            <button class="mc-button" onclick="mainEvent()">INSTALL NAURA UPDATE v.19.0</button>
-            <button class="mc-button" onclick="showGift()">OPEN BIRTHDAY CHEST</button>
-            <button class="mc-button disabled">HARDCORE MODE: FOREVER TOGETHER</button>
+            <button class="mc-button" onclick="mainEvent()">ENTER NEW AGE (v.19.0)</button>
+            <button class="mc-button" onclick="showGift()">CLAIM BIRTHDAY LOOT</button>
         </div>
 
         <div class="hotbar-container">
-            <div class="hotbar-slot" onclick="openLoot('Rare Diamond', 'Di dunia yang luas ini, banyak orang yang terlihat seperti batu biasa. Tapi bagiku, kamu adalah struktur paling langka yang pernah aku temukan. 💎')">
+            <div class="hotbar-slot" onclick="openLoot('[Stone Age]', 'Ingat saat kamu memulai petualangan baru tahun lalu? Itu adalah awal dari keberanianmu di level 18! 🪨')">
+                <img src="https://minecraft.wiki/images/Stone_Pickaxe_JE3_BE2.png" alt="Pickaxe">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('[Suit Up]', 'Kamu selalu tampil mempesona di setiap keadaan. Bahkan armor terkuat pun tidak sebanding dengan kekuatan senyummu! ✨')">
+                <img src="https://minecraft.wiki/images/Iron_Chestplate_JE2_BE2.png" alt="Armor">
+            </div>
+            
+            <div class="hotbar-slot" onclick="openLoot('[Cover Me With Diamonds]', 'Momen paling berharga bagiku adalah setiap detik yang aku habis can bersamamu. Kamu adalah diamond-ku. 💎')">
                 <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" alt="Diamond">
             </div>
             
-            <div class="hotbar-slot" onclick="openLoot('Totem of Naura', 'Setiap kali duniaku terasa runtuh, mengingat senyummu adalah totem yang memberiku kesempatan kedua untuk bangkit lagi. 😇')">
-                <img src="https://minecraft.wiki/images/Totem_of_Undying_JE2_BE2.png" alt="Totem">
+            <div class="hotbar-slot" onclick="eatCake()">
+                <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake">
             </div>
             
-            <div class="hotbar-slot" onclick="openLoot('Golden Heart', 'Kamu bukan sekadar pemulih tenaga, tapi pelindung jiwaku. Kehadiranmu memberiku kekuatan ekstra untuk menghadapi dunia. 🍎')">
-                <img src="https://minecraft.wiki/images/Enchanted_Golden_Apple_JE2_BE2.gif" alt="Golden Apple">
+            <div class="hotbar-slot" onclick="openLoot('[Great View From Up Here]', 'Level 19 punya pemandangan yang lebih indah. Jangan takut melangkah, aku selalu ada di sampingmu. 🔭')">
+                <img src="https://minecraft.wiki/images/Spyglass_JE3_BE2.png" alt="Spyglass">
             </div>
             
-            <div class="hotbar-slot" onclick="openLoot('Soul Compass', 'Jarum ini tidak lagi menunjuk ke arah utara. Sejak bertemu kamu, ke mana pun aku pergi, ia selalu menunjuk ke arahmu. 🧭')">
-                <img src="https://minecraft.wiki/images/Recovery_Compass_JE1_BE1.gif" alt="Compass">
-            </div>
-            
-            <div class="hotbar-slot" onclick="openLoot('Eternal Craft', 'Dua jiwa yang berbeda, jika disatukan dengan kesabaran, akan menghasilkan masa depan yang jauh lebih indah. ❤️')">
-                <img src="https://minecraft.wiki/images/Crafting_Table_JE4_BE3.png" alt="Crafting Table">
-            </div>
-            
-            <div class="hotbar-slot" onclick="openLoot('Petals of Love', 'Sama seperti bunga yang tumbuh di antara rerumputan, cintaku padamu mekar secara alami di hari-hariku yang sepi. 🌷')">
+            <div class="hotbar-slot" onclick="openLoot('Pink Tulip', 'Sama seperti bunga ini, cintaku mekar secara alami di setiap koordinat hidupmu. 🌷')">
                 <img src="https://minecraft.wiki/images/Pink_Tulip_JE3_BE2.png" alt="Tulip">
             </div>
             
-            <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Inilah harta karun terdalam yang aku jaga. Kamu adalah detak yang menenangkan di tengah badai lautan hidupku. 🌊')">
+            <div class="hotbar-slot active-slot" onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. Detak yang menenangkan di setiap badai. 🌊')">
                 <img src="https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE1.png" alt="Heart">
             </div>
         </div>
@@ -69,8 +68,8 @@
     <div id="loot-modal" class="mc-modal">
         <div class="mc-modal-content">
             <h3 id="loot-title" style="color: #FFFF55; margin-top: 0;"></h3>
-            <p id="loot-text" style="font-size: 0.9rem; line-height: 1.5;"></p>
-            <button class="mc-button" onclick="closeLoot()">CLOSE</button>
+            <div id="loot-text" style="font-size: 0.85rem; line-height: 1.6; white-space: pre-line;"></div>
+            <button class="mc-button" style="margin-top: 15px;" onclick="closeLoot()">CLOSE</button>
         </div>
     </div>
 
