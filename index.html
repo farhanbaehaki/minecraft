@@ -11,6 +11,11 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   </head>
   <body>
+
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="assets/live.mp4" type="video/mp4">
+    </video>
+
     <div id="start-overlay">
       <div style="text-align: center">
         <h2>[ SERVER ONLINE ]</h2>
@@ -40,25 +45,24 @@
     <div class="minecraft-screen">
       <div id="chat-box"></div>
 
-      <div class="ui-status-container">
-        <div class="health-bar">
-          <script>
-            for (let i = 0; i < 10; i++)
-              document.write(
-                '<img src="assets/heart.jpg" class="mc-icon">'
-              );
-          </script>
-        </div>
-        <div class="hunger-bar">
-          <script>
-            for (let i = 0; i < 10; i++)
-              document.write(
-                '<img src="assets/hungry.jpg" class="mc-icon">'
-              );
-          </script>
-        </div>
-      </div>
-
+<div class="ui-status-container">
+  <div class="health-bar">
+    <script>
+      // Ini adalah data gambar jantung transparan asli Minecraft
+      const heartIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEqADAAQAAAABAAAAEgAAAAB6T876AAAAe0lEQVQ4y2P8//8/AyUYIyMjIyMDA8OfP38YqIsZ8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8asDAwMAIdE38S/NfAgAAAAASUVORK5CYII=";
+      for (let i = 0; i < 10; i++)
+        document.write(`<img src="${heartIcon}" class="mc-icon">`);
+    </script>
+  </div>
+  <div class="hunger-bar">
+    <script>
+      // Ini adalah data gambar lapar transparan asli Minecraft
+      const hungerIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEqADAAQAAAABAAAAEgAAAAB6T876AAAAXklEQVQ4y2P8//8/AyUYIyMjIyMDA8OfP38YqIsZ8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8atD10SshmHDhg0YmIuF8asDAwMA6H038fLzI0sAAAAASUVORK5CYII=";
+      for (let i = 0; i < 10; i++)
+        document.write(`<img src="${hungerIcon}" class="mc-icon">`);
+    </script>
+  </div>
+</div>
       <div class="logo-container">
         <h1 class="main-title">OUR<span>CRAFT</span></h1>
         <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
@@ -110,7 +114,7 @@
           onclick="openLoot('Heart of Naura', 'Inilah harta karun yang aku jaga selamanya. ❤️')"
         >
           <img
-            src="https://minecraft.wiki/images/thumb/Heart_of_the_Sea_JE1_BE1.png/160px-Heart_of_the_Sea_JE1_BE1.png"
+            src="assets/heart.jpg"
             alt="Heart"
           />
         </div>
@@ -148,3 +152,4 @@
     <script src="script.js"></script>
   </body>
 </html>
+
