@@ -1,22 +1,28 @@
+// 1. INISIALISASI VARIABEL (Hanya satu kali)
 const bgm = document.getElementById("bgm");
 const sfxClick = document.getElementById("sfx-click");
 const sfxChallenge = document.getElementById("sfx-challenge");
 const startOverlay = document.getElementById("start-overlay");
 const advancement = document.getElementById("advancement");
 const lootModal = document.getElementById("loot-modal");
+const mainScreen = document.querySelector(".minecraft-screen");
 
-// Fungsi helper suara
+// 2. FUNGSI HELPER (Suara + Vibrasi HP)
 function playSfx(audio) {
   audio.currentTime = 0;
   audio.play().catch(() => {});
+  // Vibrasi hanya jalan di Android jika didukung
+  if (navigator.vibrate) {
+    navigator.vibrate(40);
+  }
 }
 
-// 1. LOGIKA START
+// 3. LOGIKA START GAME
 startOverlay.addEventListener("click", () => {
   startOverlay.style.opacity = "0";
   setTimeout(() => {
     startOverlay.style.display = "none";
-    document.querySelector(".minecraft-screen").classList.add("show-content");
+    mainScreen.classList.add("show-content");
   }, 500);
 
   bgm.volume = 0.3;
@@ -24,11 +30,14 @@ startOverlay.addEventListener("click", () => {
   playSfx(sfxClick);
 });
 
-// 2. SISTEM LOOT & HOTBAR
+// 4. SISTEM LOOT & HOTBAR (Dengan Efek Zoom-Blur)
 function openLoot(title, text, element) {
   playSfx(sfxClick);
 
-  // Update visual slot aktif
+  // Efek Zoom pada background (Fitur Upgrade)
+  mainScreen.classList.add("world-blur");
+
+  // Update visual slot aktif (Garis putih)
   document.querySelectorAll(".hotbar-slot").forEach((slot) => {
     slot.classList.remove("active-slot");
   });
@@ -41,10 +50,11 @@ function openLoot(title, text, element) {
 
 function closeLoot() {
   playSfx(sfxClick);
+  mainScreen.classList.remove("world-blur"); // Kembalikan background
   lootModal.style.display = "none";
 }
 
-// 3. EVENT UTAMA (NEW AGE)
+// 5. EVENT UTAMA (Enter New Age)
 function mainEvent() {
   playSfx(sfxClick);
   confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
@@ -56,7 +66,7 @@ function mainEvent() {
   }, 500);
 }
 
-// 4. QUEST: TIUP LILIN
+// 6. QUEST: TIUP LILIN
 function eatCake(element) {
   playSfx(sfxClick);
   document
@@ -64,19 +74,19 @@ function eatCake(element) {
     .forEach((s) => s.classList.remove("active-slot"));
   element.classList.add("active-slot");
 
-  confetti({ particleCount: 100, spread: 360, origin: { y: 0.7 } });
+  confetti({ particleCount: 100, spread: 100, origin: { y: 0.7 } });
 
   setTimeout(() => {
     playSfx(sfxChallenge);
     openLoot(
-      "🎂 Make a Wish!",
+      "🎂 Wish Made!",
       "Fyuuuuhhh... Lilin level 18 padam!\n\nSemoga di level 19 ini semua mimpimu di-crafting jadi nyata ya! ❤️",
       element
     );
   }, 300);
 }
 
-// 5. QUEST: BIRTHDAY CHEST (PASSWORD)
+// 7. QUEST: BIRTHDAY CHEST (PASSWORD)
 function showGift() {
   playSfx(sfxClick);
   let passcode = prompt("🔐 [QUEST] Masukkan 4 digit Passcode (DDMM):");
@@ -86,20 +96,20 @@ function showGift() {
     confetti({ particleCount: 200, spread: 100, origin: { y: 0.5 } });
     openLoot(
       "🎁 LOOT UNLOCKED!",
-      'Selamat Naura! Quest Selesai.\n\n"Kamu adalah update terbaik dalam hidupku."\n\nCek hadiah aslimu di meja ya! ❤️'
+      'Selamat Naura! Quest Selesai.\n\n"Kamu adalah update terbaik dalam hidupku."\n\nCek hadiah aslimu sekarang! ❤️'
     );
   } else if (passcode !== null) {
     alert("❌ Passcode Salah! (Hint: Tanggal & Bulan lahir)");
   }
 }
 
-// 6. SPLASH TEXT DINAMIS
+// 8. SPLASH TEXT DINAMIS (Ganti otomatis tiap 5 detik)
 const splashQuotes = [
-  "Happy Birthday, Naura!",
-  "Level 19 Unlocked!",
+  "Level 19!",
+  "HBD Naura!",
+  "Legendary Player",
+  "Diamond Girl",
   "OP Player!",
-  "The Best Update!",
-  "Diamond Girl!",
 ];
 setInterval(() => {
   const splash = document.getElementById("splash");
@@ -113,7 +123,7 @@ setInterval(() => {
   }
 }, 5000);
 
-// 7. EASTER EGG
+// 9. EASTER EGG & CINEMATIC
 let clicks = 0;
 function easterEgg() {
   clicks++;
@@ -123,4 +133,18 @@ function easterEgg() {
     );
     clicks = 0;
   }
+}
+
+function finalCinematic() {
+  playSfx(sfxClick);
+  mainScreen.innerHTML = `
+        <div class="ending-credits" style="text-align: center; color: white; padding-top: 50vh;">
+            <p class="poem-text">I see the player you mean.</p>
+            <p class="poem-text">Naura...</p>
+            <p class="poem-text">Yes. Take care. It has reached a higher level now.</p>
+            <p class="poem-text">Level 19 is not the end. It is a new world.</p>
+            <p class="poem-text">And the universe said: I Love You.</p>
+            <button class="mc-button" style="margin-top: 20px;" onclick="location.reload()">RESTART WORLD</button>
+        </div>
+    `;
 }

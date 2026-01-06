@@ -2,7 +2,10 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <title>Happy Birthday Naura!</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -10,8 +13,8 @@
   <body>
     <div id="start-overlay">
       <div style="text-align: center">
-        <h2>[ SERVER ONLINE ]</h2>
-        <p>Click to Start Game</p>
+        <h2 style="letter-spacing: 5px">[ SERVER ONLINE ]</h2>
+        <p>Tap to Play</p>
       </div>
     </div>
 
@@ -27,7 +30,7 @@
 
     <div class="minecraft-screen">
       <div class="logo-container">
-        <h1 class="main-title" onclick="easterEgg()">OUR<span>CRAFT</span></h1>
+        <h1 class="main-title">OUR<span>CRAFT</span></h1>
         <div class="splash-text" id="splash">Happy Birthday, Naura!</div>
       </div>
 
@@ -43,75 +46,46 @@
       <div class="hotbar-container">
         <div
           class="hotbar-slot"
-          onclick="openLoot('[Stone Age]', 'Tahun lalu adalah awal petualangan barumu. Keberanianmu di level 18 luar biasa! 🪨', this)"
+          onclick="openLoot('[Stone Age]', 'Level 18 adalah tutorial. Sekarang petualangan sesungguhnya dimulai! 🪨', this)"
         >
-          <img
-            src="https://minecraft.wiki/images/Stone_Pickaxe_JE3_BE2.png"
-            alt="Pickaxe"
-          />
+          <img src="https://minecraft.wiki/images/Stone_Pickaxe_JE3_BE2.png" />
         </div>
         <div
           class="hotbar-slot"
-          onclick="openLoot('[Suit Up]', 'Bahkan netherite armor pun kalah kuat dengan semangatmu hari ini! ✨', this)"
+          onclick="openLoot('[Suit Up]', 'Kamu tampak luar biasa! Armor terkuat pun kalah saing. ✨', this)"
         >
           <img
             src="https://minecraft.wiki/images/Iron_Chestplate_JE2_BE2.png"
-            alt="Armor"
           />
         </div>
         <div
           class="hotbar-slot"
-          onclick="openLoot('[Cover Me With Diamonds]', 'Kamu adalah diamond paling berharga di server hidupku. 💎', this)"
+          onclick="openLoot('[Diamond]', 'Kamu adalah item paling langka di server ini. 💎', this)"
         >
-          <img
-            src="https://minecraft.wiki/images/Diamond_JE3_BE3.png"
-            alt="Diamond"
-          />
+          <img src="https://minecraft.wiki/images/Diamond_JE3_BE3.png" />
         </div>
         <div class="hotbar-slot" onclick="eatCake(this)">
-          <img src="https://minecraft.wiki/images/Cake_JE4.png" alt="Cake" />
-        </div>
-        <div
-          class="hotbar-slot"
-          onclick="openLoot('[Great View From Up Here]', 'Level 19 punya pemandangan yang lebih luas. Jangan takut melangkah maju! 🔭', this)"
-        >
-          <img
-            src="https://minecraft.wiki/images/Spyglass_JE3_BE2.png"
-            alt="Spyglass"
-          />
-        </div>
-        <div
-          class="hotbar-slot"
-          onclick="openLoot('Pink Tulip', 'Cintaku mekar di setiap koordinat yang kita lalui bersama. 🌷', this)"
-        >
-          <img
-            src="https://minecraft.wiki/images/Pink_Tulip_JE3_BE2.png"
-            alt="Tulip"
-          />
+          <img src="https://minecraft.wiki/images/Cake_JE4.png" />
         </div>
         <div
           class="hotbar-slot active-slot"
-          onclick="openLoot('Heart of Naura', 'Harta karun paling berharga yang akan selalu aku jaga. 🌊', this)"
+          onclick="openLoot('Heart', 'Disimpan dengan aman di koordinat terdalam. 🌊', this)"
         >
           <img
             src="https://minecraft.wiki/images/Heart_of_the_Sea_JE1_BE1.png"
-            alt="Heart"
           />
         </div>
       </div>
-
-      <div class="version-text">
-        Minecraft Naura Edition v.19.0 (13 Jan 2007)
-      </div>
+      <div class="version-text">Minecraft: Naura Edition (13 Jan 2007)</div>
     </div>
 
     <div id="loot-modal" class="mc-modal">
       <div class="mc-modal-content">
-        <h3 id="loot-title" style="color: #ffff55; margin-top: 0"></h3>
+        <h3 id="loot-title" style="color: #ffff55; margin-bottom: 10px"></h3>
         <div id="loot-text"></div>
         <button
           class="mc-button"
-          style="margin-top: 15px; width: 120px"
+          style="margin-top: 20px; width: 120px"
           onclick="closeLoot()"
         >
           CLOSE
@@ -121,11 +95,7 @@
 
     <div id="advancement" class="advancement">
       <div class="adv-iconbox">
-        <img
-          src="https://minecraft.wiki/images/Cake_JE4.png"
-          width="24"
-          alt="Cake"
-        />
+        <img src="https://minecraft.wiki/images/Cake_JE4.png" width="20" />
       </div>
       <div class="adv-text">
         <span class="adv-title">Advancement Made!</span>

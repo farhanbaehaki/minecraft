@@ -1,216 +1,212 @@
 /* 1. FONT SETUP */
 @font-face {
-    font-family: 'Minecraftia';
-    src: url('Minecraftia.ttf') format('truetype');
+  font-family: "Minecraftia";
+  src: url("Minecraftia.ttf");
 }
 
 /* 2. DASAR HALAMAN */
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    font-family: 'Minecraftia', sans-serif;
-    overflow: hidden;
-    background-color: #1a1a1a;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent; /* Hilangkan highlight biru di HP */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Minecraftia", sans-serif;
+  overflow: hidden;
+  background-color: #000;
+  color: white;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* 3. LAYAR PEMBUKA */
 #start-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    color: #FFFF55;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    cursor: pointer;
-    text-align: center;
-    transition: opacity 0.5s ease;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: pointer;
+  transition: opacity 0.5s ease;
+  text-align: center;
 }
 
-/* 4. LAYAR UTAMA & BACKGROUND (FIT UNTUK HP) */
+/* 4. LAYAR UTAMA (OPTIMAL HP) */
 .minecraft-screen {
-    display: none;
-    height: 100vh;
-    width: 100vw;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
-                      url('assets/background1.jfif');
-    background-size: cover; 
-    background-position: center center;
-    background-repeat: no-repeat;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.8s ease;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("assets/background1.jfif") center/cover no-repeat;
+  display: none; /* Akan diubah jadi flex oleh JS */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
 }
 
-.show-content { display: flex !important; opacity: 1 !important; }
+.show-content {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+/* EFEK ZOOM-BLUR UNTUK HP PREMIUM */
+.world-blur {
+  transform: scale(1.1);
+  filter: blur(10px) brightness(0.4);
+}
 
 /* 5. LOGO & SPLASH */
 .logo-container {
-    text-align: center;
-    position: relative;
-    margin-bottom: 50px;
-    z-index: 2;
+  text-align: center;
+  position: relative;
+  margin-bottom: 40px;
+  z-index: 2;
 }
 
 .main-title {
-    color: #AFAFAF;
-    font-size: clamp(1.8rem, 10vw, 4rem);
-    text-shadow: 4px 4px 0px #3F3F3F;
-    margin: 0;
-    letter-spacing: 2px;
+  font-size: clamp(2rem, 12vw, 4rem);
+  text-shadow: 4px 4px 0 #3f3f3f;
+  color: #afafaf;
 }
 
-.main-title span { color: #55FF55; }
+.main-title span {
+  color: #55ff55;
+}
 
 .splash-text {
-    color: #FFFF55;
-    font-size: clamp(0.6rem, 3vw, 0.9rem);
-    position: absolute;
-    right: -20px;
-    top: -15px;
-    transform: rotate(-20deg);
-    animation: splashAnim 0.6s infinite alternate;
-    text-shadow: 2px 2px #333;
-    white-space: nowrap;
+  color: #ffff55;
+  font-size: clamp(0.7rem, 4vw, 1rem);
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  transform: rotate(-20deg);
+  animation: splashAnim 0.5s infinite alternate;
+  text-shadow: 2px 2px #333;
 }
 
 @keyframes splashAnim {
-    from { transform: rotate(-20deg) scale(1); }
-    to { transform: rotate(-20deg) scale(1.1); }
+  from {
+    transform: rotate(-20deg) scale(1);
+  }
+  to {
+    transform: rotate(-20deg) scale(1.1);
+  }
 }
 
 /* 6. TOMBOL MENU */
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 280px;
-    max-width: 85%;
-    z-index: 2;
-}
-
 .mc-button {
-    background-color: #7e7e7e;
-    border: 3px solid;
-    border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
-    color: white;
-    padding: 15px 10px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 0.75rem;
-    text-align: center;
-    text-shadow: 2px 2px #333;
-    transition: all 0.1s;
+  background: #7e7e7e;
+  border: 3px solid;
+  border-color: #dbdbdb #5b5b5b #5b5b5b #dbdbdb;
+  color: white;
+  padding: 12px;
+  width: 260px;
+  max-width: 85%;
+  font-family: inherit;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px #333;
+  cursor: pointer;
 }
 
 .mc-button:active {
-    transform: scale(0.95);
-    background-color: #5b5b5b;
-    border-color: #5b5b5b #dbdbdb #dbdbdb #5b5b5b;
+  background: #5b5b5b;
+  transform: scale(0.95);
+  border-color: #5b5b5b #dbdbdb #dbdbdb #5b5b5b;
 }
 
-.disabled { opacity: 0.5; cursor: not-allowed; }
-
-/* 7. HOTBAR (NAVIGASI QUEST) */
+/* 7. HOTBAR (SAFE AREA HP) */
 .hotbar-container {
-    position: absolute;
-    bottom: 30px;
-    display: flex;
-    gap: 4px;
-    padding: 4px;
-    background: rgba(0,0,0,0.6);
-    border: 4px solid #373737;
-    z-index: 10;
-    max-width: 95vw;
-    overflow-x: auto; /* Agar tidak pecah di layar sangat kecil */
+  position: absolute;
+  bottom: calc(25px + env(safe-area-inset-bottom));
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 4px solid #373737;
+  max-width: 95vw;
+  overflow-x: auto;
 }
 
 .hotbar-slot {
-    min-width: 42px;
-    height: 42px;
-    background: #8B8B8B;
-    border: 2px solid;
-    border-color: #373737 #FFF #FFF #373737;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+  min-width: 44px;
+  height: 44px;
+  background: #8b8b8b;
+  border: 2px solid;
+  border-color: #373737 #fff #fff #373737;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hotbar-slot img {
-    width: 28px;
-    height: 28px;
-    image-rendering: pixelated;
+  width: 30px;
+  height: 30px;
+  image-rendering: pixelated;
 }
 
 .active-slot {
-    outline: 3px solid white;
-    outline-offset: -2px;
+  outline: 3px solid white;
+  outline-offset: -2px;
 }
 
-/* 8. MODAL LOOT (TEMPAT PESAN QUEST) */
+/* 8. MODAL LOOT */
 .mc-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 10000;
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
 }
 
 .mc-modal-content {
-    background: #C6C6C6;
-    border: 4px solid #FFF;
-    border-color: #FFF #5B5B5B #5B5B5B #FFF;
-    padding: 25px;
-    text-align: center;
-    width: 85%;
-    max-width: 350px;
-    box-shadow: 10px 10px 0px rgba(0,0,0,0.4);
-}
-
-#loot-text {
-    white-space: pre-line; /* Support enter/baris baru dari JS */
-    font-size: 0.8rem;
-    line-height: 1.4;
-    color: #333;
-    margin-bottom: 15px;
+  background: #c6c6c6;
+  border: 4px solid #fff;
+  border-color: #fff #5b5b5b #5b5b5b #fff;
+  padding: 20px;
+  width: 80%;
+  max-width: 320px;
+  text-align: center;
+  color: #333;
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.4);
 }
 
 /* 9. ADVANCEMENT POP-UP */
 .advancement {
-    position: fixed;
-    top: -150px;
-    right: 15px;
-    background: #212121;
-    border: 3px solid #ffffff;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: top 0.6s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-    z-index: 10000;
+  position: fixed;
+  top: -100px;
+  right: 10px;
+  background: #212121;
+  border: 3px solid #fff;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-.show-adv { top: 20px !important; }
+.show-adv {
+  top: 20px !important;
+}
 
-.adv-title { color: #FFAA00; font-size: 0.7rem; display: block; }
-.adv-desc { color: #FFFFFF; font-size: 0.65rem; }
+.adv-title {
+  color: #ffaa00;
+  font-size: 0.7rem;
+  display: block;
+}
+.adv-desc {
+  color: #fff;
+  font-size: 0.6rem;
+}
 
 .version-text {
-    position: absolute;
-    bottom: 5px;
-    left: 8px;
-    color: rgba(255,255,255,0.7);
-    font-size: 0.5rem;
+  position: absolute;
+  bottom: 5px;
+  left: 8px;
+  color: #aaa;
+  font-size: 0.5rem;
 }
